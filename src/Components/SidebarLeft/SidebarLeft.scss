@@ -1,0 +1,36 @@
+
+.jr-leftSidebar {
+  .ant-layout-has-sider {
+    .jr-leftSidebarSidebar {
+      padding-top: 10px;
+      height: 100vh;
+      background: rgb(7, 71, 166);
+      max-width: 64px !important;
+      min-width: 64px !important;
+      &:hover {
+        max-width: 200px !important;
+      }
+      .jr-leftSidebarMenu{
+        background: rgb(7, 71, 166);
+      }
+
+      .ant-menu-item {
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          cursor: pointer;
+        }
+      }
+
+      .ant-menu-item span {
+        font-size: 1rem;
+        color: #fff;
+        font-weight: 500;
+      }
+      .ant-menu-item:nth-last-child(-n+1) {
+        position: absolute;
+        bottom: 0px;
+      }
+    }
+  }
+}
+

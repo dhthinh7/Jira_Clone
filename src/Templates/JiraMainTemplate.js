@@ -16,9 +16,9 @@ export default function JiraMainTemplate(props) {
   const { Component, ...restParam } = props;
   return <Route {...restParam} render={(propsRoute => {
     return <>
-    <MainJiraTemplate className="jiraClone">
+    <MainJiraTemplate className="jira flex">
       <SidebarLeft />
-      {/* <MenuMain /> */}
+      <MenuMain />
       {/* <Component {...propsRoute}/> */}
       {/* <div>Main content will be changed here</div> */}
     </MainJiraTemplate>;

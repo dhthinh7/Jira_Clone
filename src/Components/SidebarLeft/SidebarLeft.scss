@@ -1,5 +1,9 @@
 
 .jr-leftSidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
   .ant-layout-has-sider {
     .jr-leftSidebarSidebar {
       padding-top: 10px;
@@ -7,11 +11,19 @@
       background: rgb(7, 71, 166);
       max-width: 64px !important;
       min-width: 64px !important;
+      
       &:hover {
         max-width: 200px !important;
+        box-shadow: rgb(0 0 0 / 60%) 0px 0px 50px 0px
       }
       .jr-leftSidebarMenu{
         background: rgb(7, 71, 166);
+        .ant-menu-item-selected {
+          background-color: rgb(244, 245, 247) !important;
+          span {
+            color: rgb(7, 71, 166)
+          }
+        }
       }
 
       .ant-menu-item {
@@ -33,4 +45,3 @@
     }
   }
 }
-

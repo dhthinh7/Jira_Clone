@@ -5,7 +5,6 @@ import MenuMain from "../Components/MenuMain/MenuMain";
 import SidebarLeft from "../Components/SidebarLeft/SidebarLeft";
 
 const MainJiraTemplate = styled.div({
-  // display: "flex",
   height: "100vh",
   fontWeight: "300",
   fontFamily: '"Roboto", sans-serif'
@@ -19,7 +18,7 @@ export default function JiraMainTemplate(props) {
     <MainJiraTemplate className="jira flex">
       <SidebarLeft />
       <MenuMain />
-      {/* <Component {...propsRoute}/> */}
+      <Component {...propsRoute}/>
       {/* <div>Main content will be changed here</div> */}
     </MainJiraTemplate>;
     </>

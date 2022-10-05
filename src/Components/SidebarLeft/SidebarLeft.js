@@ -24,7 +24,7 @@ function getItem(label, key, icon, children) {
 const items = [
   getItem(<Logo size={'1.5em'} />),
   getItem('SEARCH ISSUE', '2', <SearchOutlined />),
-  getItem('CREATE', '3', <PlusOutlined />),
+  getItem('CREATE TASK', '3', <PlusOutlined />),
   getItem('ABOUT', '6', <QuestionCircleOutlined />),
 ];
 

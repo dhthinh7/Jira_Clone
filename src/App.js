@@ -1,7 +1,8 @@
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
-import MenuMain from './Components/MenuMain/MenuMain';
-import SidebarLeft from './Components/SidebarLeft/SidebarLeft';
+import CreateProject from './Pages/CreateProject/CreateProject';
+import Kanboard from './Pages/Kanboard/Kanboard';
+import ProjectMnagement from './Pages/ProjectMnagement/ProjectMnagement';
 import JiraMainTemplate from './Templates/JiraMainTemplate';
 
 function App() {
@@ -14,8 +15,10 @@ function App() {
           <MenuMain/>
           thinh
         </Route> */}
-        
-        <JiraMainTemplate exact path="/"/>
+        <JiraMainTemplate exact path="/" Component={ProjectMnagement}/>
+        <JiraMainTemplate exact path="/projectMnagement" Component={ProjectMnagement}/>
+        <JiraMainTemplate exact path="/createProject" Component={CreateProject}/>
+        <JiraMainTemplate exact path="/board" Component={Kanboard}/>
       </Switch>
       
     </div>

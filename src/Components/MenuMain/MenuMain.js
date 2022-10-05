@@ -11,19 +11,23 @@ import { NavLink } from "react-router-dom";
 
 export default function MenuMain() {
 
-  const ref = useRef();
-
   const handleClick = (e) => {
-    // const elements = document.querySelectorAll([".jira-menu .actived"]);
-    // elements[0].classList.remove('actived');
-    // e.currentTarget.classList.add('actived');
+
     handleActived(e);
+
   }
 
   const handleActived = (e) => {
-    const elements = document.querySelectorAll([".jira-menu .actived"]);
-    elements[0].classList.remove('actived');
-    e.currentTarget.classList.add('actived');
+    // const elements = document.querySelectorAll([".jira-menu .menuActived"]);
+    // console.log("elements",elements);
+    // elements.forEach((item => {
+    //   console.log("elements item",item);
+    //   item.classList.remove('menuActived');
+    //   item.classList.remove('active');
+    // }))
+    // // elements.classList.remove('menuActived');
+    // e.currentTarget.classList.add('menuActived');
+    // console.log("e.currentTarget.classList", e.currentTarget.classList);
   }
 
   return <div className="jira-menu fixed ml-16 pl-3 pr-0 pt-0 pb-6">
@@ -34,15 +38,15 @@ export default function MenuMain() {
         <p className="py-0 my-0">Software propject</p>
       </div>
     </div>
-    <NavLink to='/' className="jira-menuItem text-base actived" onClick={handleClick}>
+    <NavLink to='/board' className="jira-menuItem text-base active" activeClassName="menuActived" onClick={handleClick}>
       <span className="icon mr-4"><CreditCardOutlined /></span>
-      <span className="text">Kaban Board</span>
+      <span className="text">Kanban Board</span>
     </NavLink>
-    <NavLink to='/' className="jira-menuItem text-base" onClick={handleClick}>
+    <NavLink to='/projectMnagement' className="jira-menuItem text-base" activeClassName="menuActived" onClick={handleClick}>
       <span className="icon mr-4"><SettingOutlined /></span>
       <span className="text">Project management</span>
     </NavLink>
-    <NavLink to='/' className="jira-menuItem text-base" onClick={handleClick}>
+    <NavLink to='/createProject' className="jira-menuItem text-base" activeClassName="menuActived" onClick={handleClick}>
       <span className="icon mr-4"><PlusCircleOutlined /></span>
       <span className="text">Create project</span>
     </NavLink>

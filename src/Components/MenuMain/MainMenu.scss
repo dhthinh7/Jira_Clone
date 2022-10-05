@@ -1,0 +1,71 @@
+.jira-menu {
+  overflow: hidden auto;
+  width: 230px;
+  height: 100vh;
+  padding-top: 10px;
+  background-color: rgb(244, 245, 247);
+  .jira-menuItem {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.5rem;
+    color: rgb(17 24 39);
+    transition: all .15s ease-in-out;
+    .jr-menuLink {
+      display: flex;
+      align-items: center;
+    }
+    .icon span {
+      font-size: 1rem;
+      line-height: 1rem;
+      padding-bottom: 6px;
+    }
+
+    .text {
+      font-size: 1rem;
+    }
+
+    &:hover {
+      background-color: rgb(235, 236, 240);
+      border-radius: 0.2rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: rgb(0, 82, 204);
+    }
+
+  }
+
+  .jira-menuAvatar {
+    padding: 1.5rem 0.25rem;
+    line-height: 1.5rem;
+
+    &>div:first-child {
+      background-image: url("https://tse3.mm.bing.net/th?id=OIP.RUFnG2jQpshf7k4OQH0FEAHaFm&pid=Api&P=0");
+      background-size: 180%;
+    }
+  }
+
+
+  .jira-menuItem--unsupported:hover {
+    transition: all .15s ease-in-out;
+    cursor: not-allowed;
+    color: red;
+    .text--unsupported {
+      display: none;
+    }
+    .text--replace {
+      display: inline;
+      color: red;
+    }
+  }
+  .text--replace {
+    display: none;
+  }
+
+}
+
+.actived {
+  color: rgb(0, 82, 204) !important;
+  background-color: rgb(235, 236, 240);
+  border-radius: 0.2rem;
+}

@@ -1,6 +1,6 @@
 
-import { Breadcrumb, Layout, Menu } from 'antd';
-import React, { useState } from 'react';
+import { Layout, Menu } from 'antd';
+import React from 'react';
 import './SidebarLeft.scss';
 
 import {
@@ -9,7 +9,7 @@ import {
   QuestionCircleOutlined
 } from '@ant-design/icons';
 import Logo from '../Logo/Logo';
-const { Header, Content, Footer, Sider } = Layout;
+const { Sider } = Layout;
 
 
 function getItem(label, key, icon, children) {

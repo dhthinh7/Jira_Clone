@@ -12,12 +12,19 @@
       max-width: 64px !important;
       min-width: 64px !important;
       
+      .logo>svg {
+        margin: 0.5rem auto;
+      }
+
       &:hover {
         max-width: 200px !important;
         box-shadow: rgb(0 0 0 / 60%) 0px 0px 50px 0px
       }
       .jr-leftSidebarMenu{
         background: rgb(7, 71, 166);
+
+
+
         .ant-menu-item-selected {
           background-color: rgb(244, 245, 247) !important;
           span {

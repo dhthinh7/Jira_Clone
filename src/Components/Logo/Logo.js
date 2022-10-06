@@ -1,8 +1,7 @@
 import React from "react";
 
 export default function Logo(props) {
-  return <span>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.76 75.76" width={props.size}>
+  return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75.76 75.76" width={props.size}>
       <defs>
         <linearGradient
           id="linear-gradient"
@@ -24,7 +23,7 @@ export default function Logo(props) {
           xlinkHref="#linear-gradient"
         />
       </defs>
-      <title>Jira Software-blue</title>
+      {/* <title>Jira Software-blue</title> */}
       <g id="Layer_2" data-name="Layer 2">
         <g id="Blue">
           <path
@@ -41,6 +40,5 @@ export default function Logo(props) {
           />
         </g>
       </g>
-    </svg>
-  </span>;
+    </svg>;
 }

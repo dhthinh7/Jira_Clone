@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import styled from "styled-components";
 import MenuMain from "../Components/MenuMain/MenuMain";
 import SidebarLeft from "../Components/SidebarLeft/SidebarLeft";
+import './JiraMainTemplate.scss';
 
 const MainJiraTemplate = styled.div({
   height: "100vh",
@@ -19,7 +20,6 @@ export default function JiraMainTemplate(props) {
       <SidebarLeft />
       <MenuMain />
       <Component {...propsRoute}/>
-      {/* <div>Main content will be changed here</div> */}
     </MainJiraTemplate>;
     </>
   })}>

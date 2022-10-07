@@ -25,7 +25,6 @@ export function* listenGetListProjectSaga() {
 
 // Remove user all project
 function* removeUserSaga(action) {
-  console.log("action", action)
   try {
     const { status } = yield call(() => projectService.removeUser(action.userIdProject) );
     if (status === STATUS_CODE.SUCCESS) {

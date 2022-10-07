@@ -7,9 +7,6 @@ export default function DrawerJira() {
   const {isOpen, title, Component} = useSelector(state=>state.DrawerReducer);
   const dispatch = useDispatch();
   
-  console.log("isOpen", isOpen)
-
-
   const onClose = () => {
     dispatch({
       type: CLOSE_FORM_DRAWER

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { AutoComplete, Avatar, Button, Popconfirm, Popover, Space, Table, Tag } from 'antd';
+import { AutoComplete, Avatar, Button, Popconfirm, Popover, Table, Tag } from 'antd';
 import { useEffect } from "react";
-import { projectService } from "../../Services/ProjectService";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_USER_PROJECT_SAGA, GET_LIST_PROJECT_SAGA, GET_USER_SAGA, OPEN_FORM_DRAWER, REMOVE_USER_PROJECT_API } from "../../redux/contains/contains";
-import { FormOutlined, DeleteOutlined, CloseSquareOutlined } from '@ant-design/icons'
+import { FormOutlined, DeleteOutlined } from '@ant-design/icons'
 import EditProject from "../../Components/Form/EditProject/EditProject";
 
 export default function ProjectManagement() {

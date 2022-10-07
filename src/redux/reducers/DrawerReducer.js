@@ -7,7 +7,6 @@ const initialState = {
 };
 
 export const DrawerReducer = (state = initialState, action) => {
-  console.log("action", action)
   switch (action.type) {
     case OPEN_FORM_DRAWER:
       return { ...state, isOpen: true, title: action.title, Component: action.Component };

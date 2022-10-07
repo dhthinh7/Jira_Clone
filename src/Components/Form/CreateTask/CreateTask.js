@@ -100,7 +100,7 @@ export default function CreateTask() {
           name="description"
           init={{
             selector: 'textarea#myTextArea',
-            height: 100,
+            height: 200,
             menubar: false,
             plugins: [
               'advlist autolink lists link image charmap print preview anchor', 'searchreplace visualblocks code fullscreen', 'insertdatetime media table paste code help wordcount'

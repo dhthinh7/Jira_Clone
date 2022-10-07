@@ -3,8 +3,9 @@ import { AutoComplete, Avatar, Button, Popconfirm, Popover, Space, Table, Tag } 
 import { useEffect } from "react";
 import { projectService } from "../../Services/ProjectService";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_USER_PROJECT_SAGA, GET_LIST_PROJECT_SAGA, GET_USER_SAGA, REMOVE_USER_PROJECT_API } from "../../redux/contains/contains";
+import { ADD_USER_PROJECT_SAGA, GET_LIST_PROJECT_SAGA, GET_USER_SAGA, OPEN_FORM_DRAWER, REMOVE_USER_PROJECT_API } from "../../redux/contains/contains";
 import { FormOutlined, DeleteOutlined, CloseSquareOutlined } from '@ant-design/icons'
+import EditProject from "../../Components/Form/EditProject/EditProject";
 
 export default function ProjectManagement() {
 
@@ -44,22 +45,6 @@ export default function ProjectManagement() {
     console.log('Various parameters', pagination, filters, sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter);
-  };
-
-  const clearFilters = () => {
-    setFilteredInfo({});
-  };
-
-  const clearAll = () => {
-    setFilteredInfo({});
-    setSortedInfo({});
-  };
-
-  const setAgeSort = () => {
-    setSortedInfo({
-      order: 'descend',
-      columnKey: 'age',
-    });
   };
 
   const columns = [
@@ -126,7 +111,7 @@ export default function ProjectManagement() {
       render: (text, record, index) => {
         return <div>
           {text.members?.slice(0, 3).map((member, index) => {
-            return <Popover content={() => {
+            return <Popover key={index} content={() => {
               return <table className="table">
                 <thead>
                   <tr>
@@ -199,14 +184,15 @@ export default function ProjectManagement() {
       render: (text, record, index) => {
         return <div>
           <button className="btn mr-2 btn-primary" onClick={() => {
-            // const action = {
-            //   type: 'OPEN_FORM_EDIT_PROJECT',
-            //   title: 'Edit Project',
-            //   Component: <FormEditProject />,
-            // }
+            const action = {
+              type: OPEN_FORM_DRAWER,
+              title: 'Edit Project',
+              Component: <EditProject />,
+            }
 
-            // //dispatch lên reducer nội dung drawer
-            // dispatch(action);
+            // Open drawer with edit Project Form
+            dispatch(action);
+
             // //dispatch dữ liệu dòng hiện tai lên reducer
             // const actionEditProject = {
             //   type: 'EDIT_PROJECT',
@@ -237,14 +223,8 @@ export default function ProjectManagement() {
   ];
 
   return <div className="ml-72 p-16 w-full">
-    <h3>Project management</h3>
-
-    <Space style={{ marginBottom: 16 }}>
-      <Button onClick={setAgeSort}>Sort age</Button>
-      <Button onClick={clearFilters}>Clear filters</Button>
-      <Button onClick={clearAll}>Clear filters and sorters</Button>
-    </Space>
-    <Table tableLayout="fixed" pageSize={15} columns={columns} rowKey={`${projectList.id}`} dataSource={projectList} onChange={handleChange} />
+    <h1 className="font-semibold">Project management</h1>
+    <Table className="p-4" tableLayout="fixed" columns={columns} rowKey={"id"} dataSource={projectList} onChange={handleChange} />
   </div>;
 
 }

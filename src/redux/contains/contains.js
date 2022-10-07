@@ -16,3 +16,8 @@ export const ADD_USER_PROJECT='ADD_USER_PROJECT';
 
 // user
 export const GET_USER = 'GET_USER';
+
+// Drawer
+export const CLOSE_FORM_DRAWER = 'CLOSE_FORM_DRAWER';
+export const OPEN_FORM_DRAWER = 'OPEN_FORM_DRAWER';
+

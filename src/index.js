@@ -6,11 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { history } from './utils/history';
 import 'antd/dist/antd.css'
+import { Provider } from 'react-redux';
+import store from './redux/rootReducer';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <BrowserRouter history = {history}>
-    <App />
+    <BrowserRouter history={history}>
+        <Provider store={store}>
+            <App />
+        </Provider>
     </BrowserRouter>
 );
 

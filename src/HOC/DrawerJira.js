@@ -1,13 +1,16 @@
 import { Button, Drawer } from 'antd';
-import React, { useState } from 'react';
-import CreateTask from '../Components/Form/CreateTask/CreateTask';
-import EditProject from '../Components/Form/EditProject/EditProject';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { CLOSE_FORM_DRAWER } from '../redux/contains/contains';
 
 export default function DrawerJira() {
-  const [open, setOpen] = useState(false);
-
+  const {isOpen, title, Component} = useSelector(state=>state.DrawerReducer);
+  const dispatch = useDispatch();
+  
   const onClose = () => {
-    setOpen(false);
+    dispatch({
+      type: CLOSE_FORM_DRAWER
+    })
   };
 
   const renderFooterDrawer = () => {
@@ -20,16 +23,17 @@ export default function DrawerJira() {
   return (
     <>
       <Drawer
-        title="Creat task"
+        title={title}
         placement="right"
         onClose={onClose}
-        open={open}
+        open={isOpen}
         height='100%'
         width="720px"
         footer={renderFooterDrawer()}
       >
         {/* <CreateTask/> */}
-        <EditProject/>
+        {/* <EditProject/> */}
+        {Component}
       </Drawer>
     </>
   );

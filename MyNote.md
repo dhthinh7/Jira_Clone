@@ -15,3 +15,34 @@
 7. npm install @tinymce/tinymce-react => support text editing key=o70v2ykzygkcocst9ihtgti5i5fi030v2owgrb4hsg7gvhcf
 8. npm install formik => useFormik
 9. npm install yup => validation
+### Call API
+10. npm i axios
+### Redux
+11. npm i reux
+12. npm i react-redux
+## Middleware Saga:
+13. npm i redux-saga
+//    import { takeLatest } from `redux-saga/effects`
+//
+//    function* fetchUser(action) {
+//      ...
+//    }
+//
+//    function* watchLastFetchUser() {
+//      yield takeLatest('USER_REQUESTED', fetchUser)
+//    }
+//
+// #### Notes
+//
+// `takeLatest` is a high-level API built using `take` and `fork`. Here is how the helper could be implemented using the low-level Effects
+//
+//    const takeLatest = (patternOrChannel, saga, ...args) => fork(function*() {
+//      let lastTask
+//      while (true) {
+//        const action = yield take(patternOrChannel)
+//        if (lastTask) {
+//          yield cancel(lastTask) // cancel is no-op if the task has already terminated
+//        }
+//        lastTask = yield fork(saga, ...args.concat(action))
+//      }
+//    })

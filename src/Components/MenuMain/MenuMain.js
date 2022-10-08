@@ -25,7 +25,6 @@ export default function MenuMain() {
     //   item.classList.remove('menuActived');
     //   item.classList.remove('active');
     // }))
-    // // elements.classList.remove('menuActived');
     // e.currentTarget.classList.add('menuActived');
     // console.log("e.currentTarget.classList", e.currentTarget.classList);
   }

@@ -1,5 +1,7 @@
 import { all } from "redux-saga/effects"
-import { listenAdddUserProjectSaga, listenGetListProjectSaga, listenRemoveUserSaga } from "./ProjectSaga"
+import { listenPrioritySaga } from "./PrioritySaga"
+import { listenAdddUserProjectSaga, listenGetListProjectSaga, listenGetProjectDetailSaga, listenRemoveUserSaga } from "./ProjectSaga"
+import { listenGetAllSaga } from "./StatusSaga"
 import { listenGetUserSaga } from "./UserSaga"
 
 export function* rootSaga() {
@@ -8,6 +10,8 @@ export function* rootSaga() {
     listenRemoveUserSaga(),
     listenGetUserSaga(),
     listenAdddUserProjectSaga(),
-
+    listenGetAllSaga(),
+    listenPrioritySaga(),
+    listenGetProjectDetailSaga(),
   ])
 }

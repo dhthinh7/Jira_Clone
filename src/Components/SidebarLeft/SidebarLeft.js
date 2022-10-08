@@ -32,6 +32,7 @@ export default function SidebarLeft() {
                 title: 'Create Task',
                 Component: <CreateTask />,
               })
+              
             }}>Create task</span>
           </Menu.Item>
           <Menu.Item key="2" icon={<SearchOutlined style={{ fontSize: 20 }} />}>

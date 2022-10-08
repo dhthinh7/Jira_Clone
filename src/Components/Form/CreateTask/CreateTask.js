@@ -1,17 +1,33 @@
 import { Editor } from "@tinymce/tinymce-react";
 import { Select, Slider } from "antd";
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { GET_ALL_STATUS_SAGA, GET_PRIORITY_SAGA, GET_PROJECT_MEMBERS_SAGA } from "../../../redux/contains/contains";
 const { Option } = Select;
 
 export default function CreateTask() {
+
+  const dispatch = useDispatch()
+
+  let { listStatus } = useSelector(state => state.StatusReducer);
+  let { listPriority } = useSelector(state => state.PriorityReducer);
+  let { projectList, projectMembers } = useSelector(state => state.ProjectReducer);
+  console.log('projectMembers', projectMembers)
+
+  useEffect(() => {
+    dispatch({ type: GET_ALL_STATUS_SAGA });
+    dispatch({ type: GET_PRIORITY_SAGA });
+    // dispatch({ type: GET_LIST_PROJECT });
+    dispatch({ type: GET_PROJECT_MEMBERS_SAGA, projectId: 7808 });
+
+  }, [])
+
   return <div className="container">
     <div className="form-group">
       <p>Project</p>
       <select name="projectId" id="" className="form-control">
-        <option value="">option1</option>
-        <option value="">option2</option>
-        <option value="">option3</option>
-        <option value="">option4</option>
+        {projectList?.map(item => <option key={item.id}>{item.projectName}</option>)}
       </select>
     </div>
     <div className="form-group">
@@ -23,19 +39,13 @@ export default function CreateTask() {
         <div>
           <p>Priority</p>
           <select name="priorityId" className="form-control">
-            <option value="">option1</option>
-            <option value="">option2</option>
-            <option value="">option3</option>
-            <option value="">option4</option>
+            {listPriority?.map(item => <option key={item.priorityId}>{item.priority}</option>)}
           </select>
         </div>
         <div>
           <p>Task type</p>
           <select className="form-control" name="typeId">
-            <option value="">option1</option>
-            <option value="">option2</option>
-            <option value="">option3</option>
-            <option value="">option4</option>
+            {listStatus?.map(item => <option key={item.statusId}>{item.statusName}</option>)}
           </select>
         </div>
       </div>
@@ -63,8 +73,7 @@ export default function CreateTask() {
             }}
             style={{ width: '100%' }}
           >
-            <Option key='1'>a</Option>
-            <Option key='2'>b</Option>
+            {projectMembers?.map(item => <Option key={item.userId}>{item.name}</Option>)}
           </Select>
           <div className="row mt-3">
             <div className="col-12">

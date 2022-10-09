@@ -1,9 +1,10 @@
-/***************************Redux Saga*****************************************/
+/************************** Redux Saga *****************************************/
 // Project
 export const GET_LIST_PROJECT_SAGA = 'GET_LIST_PROJECT_SAGA';
 export const REMOVE_USER_PROJECT_API = 'REMOVE_USER_PROJECT_API';
 export const ADD_USER_PROJECT_SAGA = 'ADD_USER_PROJECT_SAGA';
 export const GET_PROJECT_MEMBERS_SAGA = 'GET_PROJECT_MEMBERS_SAGA';
+export const DELETE_PROJECT_SAGA = 'DELETE_PROJECT_SAGA';
 
 // User
 export const GET_USER_SAGA = 'GET_USER_SAGA';

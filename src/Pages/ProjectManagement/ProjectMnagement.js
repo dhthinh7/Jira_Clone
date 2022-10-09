@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AutoComplete, Avatar, Button, Popconfirm, Popover, Table, Tag } from 'antd';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_USER_PROJECT_SAGA, GET_LIST_PROJECT_SAGA, GET_USER_SAGA, OPEN_FORM_DRAWER, REMOVE_USER_PROJECT_API } from "../../redux/contains/contains";
+import { ADD_USER_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT_SAGA, GET_USER_SAGA, OPEN_FORM_DRAWER, REMOVE_USER_PROJECT_API } from "../../redux/contains/contains";
 import { FormOutlined, DeleteOutlined } from '@ant-design/icons'
 import EditProject from "../../Components/Form/EditProject/EditProject";
 
@@ -88,7 +88,7 @@ export default function ProjectManagement() {
       // dataIndex: 'creator',
       key: 'creator',
       filteredValue: filteredInfo.address || null,
-      onFilter: (value, record) => record.address.includes(value),
+      onFilter: (value, record) => record.creator.includes(value),
       sorter: (item2, item1) => {
         let creator1 = item1.creator?.name.trim().toLowerCase();
         let creator2 = item2.creator?.name.trim().toLowerCase();
@@ -202,9 +202,10 @@ export default function ProjectManagement() {
           </button>
           <Popconfirm
             title="Are you sure to delete this project?"
-            // onConfirm={() => {
-            //   dispatch({ type: 'DELETE_PROJECT_SAGA', idProject: record.id })
-            // }}
+            onConfirm={() => {
+              console.log("text.id", text.id)
+              dispatch({ type: DELETE_PROJECT_SAGA, projectId: text.id });
+            }}
 
             okText="Yes"
             cancelText="No"

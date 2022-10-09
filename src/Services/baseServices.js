@@ -19,4 +19,13 @@ export class baseServices extends Component {
       headers: { 'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}
     })
   }
+
+  delete = (url, model) => {
+    return Axios({
+      url: `${DOMAIN}/${url}`,
+      method: 'DELETE',
+      // data: model,
+      headers: { 'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}
+    })
+  }
 }

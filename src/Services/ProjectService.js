@@ -6,6 +6,7 @@ class ProjectService extends baseServices {
   assignUserProject = (user) => this.post('Project/assignUserProject', user);
   getProjectDetail = (projectId) => this.get(`Project/getProjectDetail?id=${projectId}`);
   createTask = (objectTask) => this.post('Project/createTask', objectTask);
+  deleteProject = (projectId) => this.delete(`Project/deleteProject?projectId=${projectId}`);
 }
 
 export const projectService = new ProjectService();

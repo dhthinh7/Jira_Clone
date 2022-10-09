@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CLOSE_FORM_DRAWER } from '../redux/contains/contains';
 
 export default function DrawerJira() {
-  const {isOpen, title, Component} = useSelector(state=>state.DrawerReducer);
+  const {isOpen, title, Component, callBackSubmit} = useSelector(state=>state.DrawerReducer);
   const dispatch = useDispatch();
   
   const onClose = () => {
@@ -15,7 +15,7 @@ export default function DrawerJira() {
 
   const renderFooterDrawer = () => {
     return <div className='text-right'>
-      <Button type="primary" className='mr-2'>Submit</Button>
+      <Button type="primary" className='mr-2' onClick={callBackSubmit}>Submit</Button>
       <Button onClick={onClose}>Cancel</Button>
     </div>
   }

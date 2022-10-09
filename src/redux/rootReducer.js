@@ -6,6 +6,7 @@ import { UserReducer } from './reducers/UserReducer';
 import { DrawerReducer } from './reducers/DrawerReducer';
 import { StatusReducer } from './reducers/StatusReducer';
 import { PriorityReducer } from './reducers/PriorityReducer';
+import { TypeReducer } from './reducers/TypeReducer';
 
 // Creat redux-saga
 const middleWareSaga = createMiddleWareSaga();
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   UserReducer,
   DrawerReducer,
   StatusReducer,
-  PriorityReducer
+  PriorityReducer,
+  TypeReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(middleWareSaga));

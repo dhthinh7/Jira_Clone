@@ -5,7 +5,6 @@ import { GET_PRIORITY, GET_PRIORITY_SAGA } from "../contains/contains";
 function* PrioritySaga() {
   try {
     let { data, status } = yield call(() => priorityService.getAll());
-    console.log("listPriority", data)
     if (status === 200) {
       yield put({
         type: GET_PRIORITY,

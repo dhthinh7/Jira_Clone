@@ -3,8 +3,8 @@ import './App.css';
 import DrawerJira from './HOC/DrawerJira';
 import CreateProject from './Pages/CreateProject/CreateProject';
 import Kanboard from './Pages/Kanboard/Kanboard';
-import ProjectManagement from './Pages/ProjectManagement/ProjectMnagement';
 import JiraMainTemplate from './Templates/JiraMainTemplate';
+import ProjectManagement from './Pages/ProjectManagement/ProjectManagement'
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           Test
         </Route> */}
         <JiraMainTemplate exact path="/" Component={ProjectManagement}/>
-        <JiraMainTemplate exact path="/projectMnagement" Component={ProjectManagement}/>
+        <JiraMainTemplate exact path="/projectManagement" Component={ProjectManagement}/>
         <JiraMainTemplate exact path="/createProject" Component={CreateProject}/>
         <JiraMainTemplate exact path="/board" Component={Kanboard}/>
       </Switch>

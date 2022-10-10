@@ -8,15 +8,16 @@ import { history } from './utils/history';
 import 'antd/dist/antd.css'
 import { Provider } from 'react-redux';
 import store from './redux/rootReducer';
+import { Router } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <BrowserRouter history={history}>
+    <Router history={history}>
         <Provider store={store}>
             <App />
         </Provider>
-    </BrowserRouter>
+    </Router>
 );
 
 // If you want to start measuring performance in your app, pass a function

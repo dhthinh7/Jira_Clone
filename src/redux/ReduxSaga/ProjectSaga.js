@@ -1,8 +1,9 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { projectService } from '../../Services/ProjectService';
 import { STATUS_CODE } from '../../utils/constain/setting';
+import { history } from '../../utils/history';
 import { JiraNotification } from '../../utils/JiraNotification/JiraNotification';
-import { ADD_USER_PROJECT_SAGA, CLOSE_FORM_DRAWER, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_MEMBERS, GET_PROJECT_MEMBERS_SAGA, REMOVE_USER_PROJECT_API, UPDATE_PROJECT_SAGA } from "../contains/contains";
+import { ADD_USER_PROJECT_SAGA, CLOSE_FORM_DRAWER, CREATE_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_MEMBERS, GET_PROJECT_MEMBERS_SAGA, REMOVE_USER_PROJECT_API, UPDATE_PROJECT_SAGA } from "../contains/contains";
 
 // Get all project
 function* getListProjectSaga() {
@@ -120,4 +121,22 @@ function* updateProjectSaga(action) {
 
 export function* listenUpdateProjectSaga() {
   yield takeLatest(UPDATE_PROJECT_SAGA, updateProjectSaga);
+}
+
+// Create Project
+function* createProjectAuthorizationSaga(action) {
+  try {
+    let {data, status} = yield call(()=>projectService.createProjectAuthorization(action.newProject))
+    if (status === STATUS_CODE.SUCCESS) {
+      JiraNotification('success', 'Create project successfully !');
+      history.push('/')
+    }
+  } catch (error) {
+    JiraNotification('error', 'Create project fail !')
+    console.log(error)
+  }
+}
+
+export function* listenCreateProjectAuthorizationSaga() {
+  yield takeLatest(CREATE_PROJECT_SAGA, createProjectAuthorizationSaga);
 }

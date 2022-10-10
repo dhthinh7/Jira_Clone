@@ -50,7 +50,8 @@ export default function ProjectManagement() {
       title: 'Id',
       dataIndex: 'id',
       key: 'id',
-      sorter: (a, b) => a.id - b.id,
+      sorter: (a, b) => b.id - a.id,
+      defaultSortOrder: 'ascend',
       ellipsis: true,
       width: '10%'
     },

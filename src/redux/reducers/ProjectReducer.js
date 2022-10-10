@@ -1,8 +1,11 @@
-import { GET_LIST_PROJECT, GET_PROJECT_MEMBERS } from "../contains/contains";
+import { EDIT_PROJECT, GET_LIST_PROJECT, GET_PROJECT_MEMBERS } from "../contains/contains";
 
 const initialState = {
   projectList: [],
-  projectMembers: []
+  projectMembers: [],
+  projectEdit: {
+    id: 123
+  }
 };
 
 export const ProjectReducer = (state = initialState, action) => {
@@ -10,7 +13,9 @@ export const ProjectReducer = (state = initialState, action) => {
     case GET_LIST_PROJECT:
       return {...state, projectList: action.projectList};
     case GET_PROJECT_MEMBERS:
-      return {...state, projectMembers: action.projectMembers}
+      return {...state, projectMembers: action.projectMembers};
+    case EDIT_PROJECT:
+      return {...state, projectEdit: action.projectEdit};
     default:
       return state;
   }

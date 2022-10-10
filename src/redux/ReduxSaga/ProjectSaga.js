@@ -1,8 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { projectService } from '../../Services/ProjectService';
-import { userServices } from '../../Services/UserService';
 import { STATUS_CODE } from '../../utils/constain/setting';
-import { ADD_USER_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_MEMBERS, GET_PROJECT_MEMBERS_SAGA, GET_USER, REMOVE_USER, REMOVE_USER_PROJECT_API } from "../contains/contains";
+import { JiraNotification } from '../../utils/JiraNotification/JiraNotification';
+import { ADD_USER_PROJECT_SAGA, CLOSE_FORM_DRAWER, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_MEMBERS, GET_PROJECT_MEMBERS_SAGA, REMOVE_USER_PROJECT_API, UPDATE_PROJECT_SAGA } from "../contains/contains";
 
 // Get all project
 function* getListProjectSaga() {
@@ -42,7 +42,6 @@ export function* listenGetProjectDetailSaga() {
   yield takeLatest(GET_PROJECT_MEMBERS_SAGA, getProjectDetailSaga)
 }
 
-
 // Remove user all project
 function* removeUserSaga(action) {
   try {
@@ -61,13 +60,13 @@ export function* listenRemoveUserSaga() {
   yield takeLatest(REMOVE_USER_PROJECT_API, removeUserSaga)
 }
 
-
 // Add user to project
 function* addUserProjectSaga(action) {
   try {
     const { status } = yield call(() => projectService.assignUserProject(action.userProject))
 
     if (status === STATUS_CODE.SUCCESS) {
+      JiraNotification('success', 'Add members successfully !');
       yield put({
         type: GET_LIST_PROJECT_SAGA,
       })
@@ -77,23 +76,48 @@ function* addUserProjectSaga(action) {
   }
 }
 
-export function* listenAdddUserProjectSaga() {
+export function* listenAddUserProjectSaga() {
   yield takeLatest(ADD_USER_PROJECT_SAGA, addUserProjectSaga);
 }
 
 // Delete Project
-function *deleteProjectSaga(action) {
-  console.log("action", action.projectId)
+function* deleteProjectSaga(action) {
   try {
     let { status } = yield call(() => projectService.deleteProject(action.projectId));
     if (status === STATUS_CODE.SUCCESS) {
-      yield put({type: GET_LIST_PROJECT_SAGA});
+      JiraNotification('success', 'Delete project successfully !');
+      yield put({ type: GET_LIST_PROJECT_SAGA });
     }
   } catch (error) {
+    JiraNotification('error', 'Delete project fail !');
     console.log(error);
   }
 }
 
-export function *listenDeleteProjectSaga() {
+export function* listenDeleteProjectSaga() {
   yield takeLatest(DELETE_PROJECT_SAGA, deleteProjectSaga);
+}
+
+// Update Project
+function* updateProjectSaga(action) {
+  try {
+    let { status } = yield call(() => projectService.updateProject(action.projectUpdate));
+    if (status === STATUS_CODE.SUCCESS) {
+      JiraNotification('success', 'Update project successfully !');
+      yield put({
+        type: CLOSE_FORM_DRAWER
+      })
+      // Reload list project
+      yield put({
+        type: GET_LIST_PROJECT_SAGA
+      })
+    }
+  } catch (error) {
+    JiraNotification('error', 'Update project fail !');
+    console.log(error)
+  }
+}
+
+export function* listenUpdateProjectSaga() {
+  yield takeLatest(UPDATE_PROJECT_SAGA, updateProjectSaga);
 }

@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { Component } from "react";
+import { Component } from "react";
 import { DOMAIN, TOKEN } from "../utils/constain/setting";
 
 export class baseServices extends Component {
@@ -16,7 +16,7 @@ export class baseServices extends Component {
       url: `${DOMAIN}/${url}`,
       method: 'POST',
       data: model,
-      headers: { 'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}
+      headers: { 'Authorization': 'Bearer ' + localStorage.getItem(TOKEN) }
     })
   }
 
@@ -25,7 +25,16 @@ export class baseServices extends Component {
       url: `${DOMAIN}/${url}`,
       method: 'DELETE',
       // data: model,
-      headers: { 'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)}
+      headers: { 'Authorization': 'Bearer ' + localStorage.getItem(TOKEN) }
+    })
+  }
+
+  put = (url, model) => {
+    return Axios({
+      url: `${DOMAIN}/${url}`,
+      method: 'PUT',
+      data: model,
+      headers: { 'Authorization': 'Bearer ' + localStorage.getItem(TOKEN) }
     })
   }
 }

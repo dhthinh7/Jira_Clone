@@ -1,4 +1,4 @@
-export const DOMAIN = 'http://casestudy.cyberlearn.vn/api';
+export const DOMAIN = 'https://casestudy.cyberlearn.vn/api';
 
 export const TOKEN = 'ACCESSTOKEN';
 export const USER_LOGIN = 'USER_LOGIN';

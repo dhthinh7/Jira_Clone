@@ -1,10 +1,10 @@
-import { CLOSE_FORM_DRAWER, OPEN_FORM_DRAWER, SET_SUBMIT_CREATE_TASK } from "../contains/contains";
+import { CLOSE_FORM_DRAWER, OPEN_FORM_DRAWER, SET_SUBMIT_CREATE_TASK, SET_SUBMIT_TASK } from "../contains/contains";
 
 const initialState = {
   isOpen: false,
   title: '',
   Component: <div></div>,
-  callBackSubmit: (propsValue) => {alert('click')}
+  callBackSubmit: (propsValue) => { alert('click') }
 };
 
 export const DrawerReducer = (state = initialState, action) => {
@@ -14,7 +14,9 @@ export const DrawerReducer = (state = initialState, action) => {
     case CLOSE_FORM_DRAWER:
       return { ...state, isOpen: false };
     case SET_SUBMIT_CREATE_TASK:
-      return {...state, callBackSubmit: action.callBackSubmit}
+      return { ...state, callBackSubmit: action.callBackSubmit };
+    case SET_SUBMIT_TASK:
+      return { ...state, callBackSubmit: action.callBackSubmit };
     default:
       return { ...state };
   }

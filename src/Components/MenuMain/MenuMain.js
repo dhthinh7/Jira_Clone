@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect } from "react";
 import './MainMenu.scss';
 import '../SidebarLeft/SidebarLeft.scss';
 import {
@@ -7,9 +7,16 @@ import {
   PlusCircleOutlined
 } from '@ant-design/icons';
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 
 export default function MenuMain() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    //Gọi api để lấy dữ liệu thẻ select
+    dispatch({ type: 'GET_ALL_PROJECT_CATEGORY_SAGA' })
+  }, []);
 
   const handleClick = (e) => {
 

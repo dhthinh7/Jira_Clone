@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AutoComplete, Avatar, Button, Popconfirm, Popover, Table, Tag } from 'antd';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_USER_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT_SAGA, GET_USER_SAGA, OPEN_FORM_DRAWER, REMOVE_USER_PROJECT_API } from "../../redux/contains/contains";
+import { ADD_USER_PROJECT_SAGA, DELETE_PROJECT_SAGA, EDIT_PROJECT, GET_LIST_PROJECT_SAGA, GET_USER_SAGA, OPEN_FORM_DRAWER, REMOVE_USER_PROJECT_API } from "../../redux/contains/contains";
 import { FormOutlined, DeleteOutlined } from '@ant-design/icons'
 import EditProject from "../../Components/Form/EditProject/EditProject";
 
@@ -191,19 +191,18 @@ export default function ProjectManagement() {
             // Open drawer with edit Project Form
             dispatch(action);
 
-            // //dispatch dữ liệu dòng hiện tai lên reducer
-            // const actionEditProject = {
-            //   type: 'EDIT_PROJECT',
-            //   projectEditModel: record
-            // }
-            // dispatch(actionEditProject);
+            // Dispatch current row to reducer
+            const actionEditProject = {
+              type: EDIT_PROJECT,
+              projectEdit: text
+            }
+            dispatch(actionEditProject);
           }}>
             <FormOutlined style={{ fontSize: 17 }} />
           </button>
           <Popconfirm
             title="Are you sure to delete this project?"
             onConfirm={() => {
-              console.log("text.id", text.id)
               dispatch({ type: DELETE_PROJECT_SAGA, projectId: text.id });
             }}
 

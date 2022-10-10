@@ -48,7 +48,7 @@ export default function MenuMain() {
       <span className="icon mr-4"><CreditCardOutlined /></span>
       <span className="text">Kanban Board</span>
     </NavLink>
-    <NavLink to='/projectMnagement' className="jira-menuItem text-base" activeClassName="menuActived" onClick={handleClick}>
+    <NavLink to='/projectManagement' className="jira-menuItem text-base" activeClassName="menuActived" onClick={handleClick}>
       <span className="icon mr-4"><SettingOutlined /></span>
       <span className="text">Project management</span>
     </NavLink>

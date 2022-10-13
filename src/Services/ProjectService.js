@@ -1,4 +1,3 @@
-import { object } from "yup";
 import { baseServices } from "./baseServices";
 
 class ProjectService extends baseServices {
@@ -11,6 +10,7 @@ class ProjectService extends baseServices {
   updateProject = (projectUpdate) => this.put(`Project/updateProject?projectId=${projectUpdate.id}`, projectUpdate);
   // createProject = (objectProject) => this.post('Project/createProject', objectProject);
   createProjectAuthorization = (objectProject) => this.post('Project/createProjectAuthorize', objectProject);
+  updateStatusTask = (taskStatusUpdate) => this.put(`Project/updateStatus`, taskStatusUpdate);
 }
 
 export const projectService = new ProjectService();

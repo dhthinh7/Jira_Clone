@@ -1,0 +1,27 @@
+.jr-board-content {
+  .list-group-item {
+    margin: 15px 10px 0 10px ;
+    border-radius: 10px ;
+    transition: all 1s ease-in-out;
+    &:hover {
+      background: linear-gradient(
+        240deg,
+        hsl(216deg 92% 34%) 0%,
+        hsl(225deg 39% 50%) 9%,
+        hsl(226deg 35% 58%) 17%,
+        hsl(227deg 33% 64%) 23%,
+        hsl(228deg 32% 70%) 30%,
+        hsl(228deg 31% 75%) 37%,
+        hsl(228deg 30% 80%) 44%,
+        hsl(229deg 29% 84%) 51%,
+        hsl(229deg 28% 89%) 60%,
+        hsl(229deg 28% 93%) 69%,
+        hsl(229deg 27% 96%) 82%,
+        hsl(0deg 0% 100%) 100%
+      );
+    }
+  }
+  .list-group-flush:last-child .list-group-item:last-child {
+    margin-bottom: 15px;
+  }
+}

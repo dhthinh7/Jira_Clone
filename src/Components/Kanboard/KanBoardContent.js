@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { UPDATE_STATUS_TASK_SAGA } from "../../redux/contains/contains";
+import { GET_TASK_DETAIL_SAGA, UPDATE_STATUS_TASK_SAGA } from "../../redux/contains/contains";
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import './KanBoardContent.scss';
 
@@ -76,7 +76,7 @@ export default function KanBoardContent(props) {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                           key={index} className="list-group-item" data-toggle="modal" data-target="#infoModal" onClick={() => {
-                            // dispatch({ type: GET_TASK_DETAIL_SAGA, taskId: task.taskId });
+                            dispatch({ type: GET_TASK_DETAIL_SAGA, taskId: task.taskId });
 
                           }}>
                           <p className="font-weight-300">

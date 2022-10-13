@@ -3,7 +3,7 @@ import { projectService } from '../../Services/ProjectService';
 import { STATUS_CODE } from '../../utils/constain/setting';
 import { history } from '../../utils/history';
 import { JiraNotification } from '../../utils/JiraNotification/JiraNotification';
-import { ADD_USER_PROJECT_SAGA, CLOSE_FORM_DRAWER, CREATE_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_DETAIL, GET_PROJECT_DETAIL_SAGA, GET_PROJECT_DETAIL_SHOW_LOADING_ONE_TIME, HIDE_LOADER, REMOVE_USER_PROJECT_API, SHOW_LOADER, UPDATE_PROJECT_SAGA, UPDATE_STATUS_TASK_SAGA } from "../contains/contains";
+import { ADD_USER_PROJECT_SAGA, CLOSE_FORM_DRAWER, CREATE_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_DETAIL, GET_PROJECT_DETAIL_SAGA, GET_PROJECT_DETAIL_SHOW_LOADING_ONE_TIME, GET_TASK_DETAIL_SAGA, GET_TASK_LIST, HIDE_LOADER, REMOVE_USER_PROJECT_API, SHOW_LOADER, UPDATE_PROJECT_SAGA, UPDATE_STATUS_TASK_SAGA } from "../contains/contains";
 
 // Get all project
 function* getListProjectSaga() {
@@ -174,4 +174,24 @@ function* updateStatusTaskSaga(action) {
 
 export function* listenUpdateStatusTaskSaga() {
   yield takeLatest(UPDATE_STATUS_TASK_SAGA, updateStatusTaskSaga);
+}
+
+// Get Task detail
+function* getTaskDetailSaga(action) {
+  console.log("action", action)
+  try {
+    let {data, status} = yield call(()=>projectService.getTaskDetail(action.taskId));
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put({
+        type: GET_TASK_LIST,
+        taskDetailModal: data.content
+      })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export function* listenGetTaskDetailSaga() {
+  yield takeLatest(GET_TASK_DETAIL_SAGA, getTaskDetailSaga);
 }

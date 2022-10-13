@@ -6,12 +6,14 @@ import Kanboard from './Pages/Kanboard/Kanboard';
 import JiraMainTemplate from './Templates/JiraMainTemplate';
 import ProjectManagement from './Pages/ProjectManagement/ProjectManagement'
 import Loading from './Components/Loading/Loading';
+import Modal from './Components/Modal/Modal';
 
 function App() {
   return (
     <div className="App">
       <DrawerJira />
       <Loading />
+      <Modal/>
       <Switch>
         {/* <Route exact path="/" component={SidebarLeft}/> */}
         {/* <Route exact path="/">

@@ -3,7 +3,7 @@ import { projectService } from '../../Services/ProjectService';
 import { STATUS_CODE } from '../../utils/constain/setting';
 import { history } from '../../utils/history';
 import { JiraNotification } from '../../utils/JiraNotification/JiraNotification';
-import { ADD_USER_PROJECT_SAGA, CLOSE_FORM_DRAWER, CREATE_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_DETAIL, GET_PROJECT_DETAIL_SAGA, HIDE_LOADER, REMOVE_USER_PROJECT_API, SHOW_LOADER, UPDATE_PROJECT_SAGA, UPDATE_STATUS_TASK_SAGA } from "../contains/contains";
+import { ADD_USER_PROJECT_SAGA, CLOSE_FORM_DRAWER, CREATE_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_DETAIL, GET_PROJECT_DETAIL_SAGA, GET_PROJECT_DETAIL_SHOW_LOADING_ONE_TIME, HIDE_LOADER, REMOVE_USER_PROJECT_API, SHOW_LOADER, UPDATE_PROJECT_SAGA, UPDATE_STATUS_TASK_SAGA } from "../contains/contains";
 
 // Get all project
 function* getListProjectSaga() {
@@ -26,6 +26,29 @@ export function* listenGetListProjectSaga() {
 
 // Get project detail
 function* getProjectDetailSaga(action) {
+  // yield put({type: SHOW_LOADER});
+  try {
+    let { data, status } = yield call(() => projectService.getProjectDetail(action.projectId));
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put({
+        type: GET_PROJECT_DETAIL,
+        projectDetail: data.content
+      })
+    }
+  } catch (error) {
+    history.push('./projectManagement');
+    console.log(error);
+  }
+  // yield delay(500);
+  // yield put({type: HIDE_LOADER});
+}
+
+export function* listenGetProjectDetailSaga() {
+  yield takeLatest(GET_PROJECT_DETAIL_SAGA, getProjectDetailSaga)
+}
+
+// Get project detail and show loading only one time
+function* getProjectDetailLoadingSaga(action) {
   yield put({type: SHOW_LOADER});
   try {
     let { data, status } = yield call(() => projectService.getProjectDetail(action.projectId));
@@ -43,9 +66,11 @@ function* getProjectDetailSaga(action) {
   yield put({type: HIDE_LOADER});
 }
 
-export function* listenGetProjectDetailSaga() {
-  yield takeLatest(GET_PROJECT_DETAIL_SAGA, getProjectDetailSaga)
+export function* listenGetProjectDetailLoadingSaga() {
+  yield takeLatest(GET_PROJECT_DETAIL_SHOW_LOADING_ONE_TIME, getProjectDetailLoadingSaga)
 }
+
+
 
 // Remove user all project
 function* removeUserSaga(action) {

@@ -35,8 +35,6 @@ function CreateTask(props) {
     dispatch({ type: SET_SUBMIT_TASK, callBackSubmit: handleSubmit });
   }, [])
 
-  
-
   return <> <form className="container" onSubmit={handleSubmit}>
     <div className="form-group">
       <p>Project</p>

@@ -26,7 +26,6 @@ export function* listenGetListProjectSaga() {
 
 // Get project detail
 function* getProjectDetailSaga(action) {
-  // yield put({type: SHOW_LOADER});
   try {
     let { data, status } = yield call(() => projectService.getProjectDetail(action.projectId));
     if (status === STATUS_CODE.SUCCESS) {
@@ -39,8 +38,6 @@ function* getProjectDetailSaga(action) {
     history.push('./projectManagement');
     console.log(error);
   }
-  // yield delay(500);
-  // yield put({type: HIDE_LOADER});
 }
 
 export function* listenGetProjectDetailSaga() {
@@ -49,28 +46,16 @@ export function* listenGetProjectDetailSaga() {
 
 // Get project detail and show loading only one time
 function* getProjectDetailLoadingSaga(action) {
-  yield put({type: SHOW_LOADER});
-  try {
-    let { data, status } = yield call(() => projectService.getProjectDetail(action.projectId));
-    if (status === STATUS_CODE.SUCCESS) {
-      yield put({
-        type: GET_PROJECT_DETAIL,
-        projectDetail: data.content
-      })
-    }
-  } catch (error) {
-    history.push('./projectManagement');
-    console.log(error);
-  }
+  let { projectId } = action;
+  yield put({ type: SHOW_LOADER });
+  yield put({ type: GET_PROJECT_DETAIL_SAGA, projectId });
   yield delay(500);
-  yield put({type: HIDE_LOADER});
+  yield put({ type: HIDE_LOADER });
 }
 
 export function* listenGetProjectDetailLoadingSaga() {
   yield takeLatest(GET_PROJECT_DETAIL_SHOW_LOADING_ONE_TIME, getProjectDetailLoadingSaga)
 }
-
-
 
 // Remove user all project
 function* removeUserSaga(action) {

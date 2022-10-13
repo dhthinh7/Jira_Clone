@@ -50,3 +50,5 @@ export const history = createBrowserHistory();
 //        lastTask = yield fork(saga, ...args.concat(action))
 //      }
 //    })
+14. npm i react-html-parser
+15. npm install react-beautiful-dnd --save

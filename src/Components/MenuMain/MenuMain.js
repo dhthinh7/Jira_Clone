@@ -44,7 +44,7 @@ export default function MenuMain() {
         <p className="py-0 my-0">Software propject</p>
       </div>
     </div>
-    <NavLink to='/board' className="jira-menuItem text-base active" activeClassName="menuActived" onClick={handleClick}>
+    <NavLink to='/kanboard' className="jira-menuItem text-base active" activeClassName="menuActived" onClick={handleClick}>
       <span className="icon mr-4"><CreditCardOutlined /></span>
       <span className="text">Kanban Board</span>
     </NavLink>

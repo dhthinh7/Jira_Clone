@@ -4,7 +4,7 @@ import { withFormik } from "formik";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { CREATE_TASK_SAGA, GET_ALL_STATUS_SAGA, GET_PRIORITY_SAGA, GET_PROJECT_MEMBERS_SAGA, GET_TYPE_SAGA, SET_SUBMIT_CREATE_TASK } from "../../../redux/contains/contains";
+import { CREATE_TASK_SAGA, GET_ALL_STATUS_SAGA, GET_PRIORITY_SAGA, GET_PROJECT_DETAIL_SAGA, GET_TYPE_SAGA, SET_SUBMIT_TASK } from "../../../redux/contains/contains";
 
 function CreateTask(props) {
 
@@ -14,9 +14,9 @@ function CreateTask(props) {
     timeRemaining: 0
   })
 
-  let { listStatus } = useSelector(state => state.StatusReducer);
-  let { listPriority } = useSelector(state => state.PriorityReducer);
-  let { projectList, projectMembers } = useSelector(state => state.ProjectReducer);
+  // let { listStatus } = useSelector(state => state.StatusReducer);
+  // let { listPriority } = useSelector(state => state.PriorityReducer);
+  // let { projectList, projectMembers } = useSelector(state => state.ProjectReducer);
   
 
   // Create props for useFormik: useFormik có tất cả các props từ props 
@@ -31,7 +31,7 @@ function CreateTask(props) {
     dispatch({ type: GET_ALL_STATUS_SAGA });
     dispatch({ type: GET_PRIORITY_SAGA });
     dispatch({ type: GET_TYPE_SAGA });
-    dispatch({ type: SET_SUBMIT_CREATE_TASK, callBackSubmit: handleSubmit })
+    dispatch({ type: SET_SUBMIT_TASK, callBackSubmit: handleSubmit });
   }, [])
 
   
@@ -40,11 +40,11 @@ function CreateTask(props) {
     <div className="form-group">
       <p>Project</p>
       <select name="projectId" className="form-control" onChange={(e) => {
-        dispatch({ type: GET_PROJECT_MEMBERS_SAGA, projectId: e.target.value })
+        dispatch({ type: GET_PROJECT_DETAIL_SAGA, projectId: e.target.value })
         setFieldValue('projectId', e.target.value)
         
       }}>
-        {projectList?.map((item, index) => <option key={index} value={item.id}>{item.projectName}</option>)}
+        {props.projectList?.map((item, index) => <option key={index} value={item.id}>{item.projectName}</option>)}
       </select>
     </div>
     <div className="form-group">
@@ -54,7 +54,7 @@ function CreateTask(props) {
     <div className="form-group">
       <p>Status</p>
       <select name="statusId" className="form-control" onChange={handleChange}>
-        {listStatus?.map((item, index) => <option key={index} value={item.statusId}>{item.statusName}</option>)}
+        {props.listStatus?.map((item, index) => <option key={index} value={item.statusId}>{item.statusName}</option>)}
       </select>
     </div>
     <div className="form-group">
@@ -62,7 +62,7 @@ function CreateTask(props) {
         <div>
           <p>Priority</p>
           <select name="priorityId" className="form-control" onChange={handleChange}>
-            {listPriority?.map((item, index) => {
+            {props.listPriority?.map((item, index) => {
               return <option key={index} value={item.priorityId}>{item.priority}</option>
             })}
           </select>
@@ -84,7 +84,7 @@ function CreateTask(props) {
           <Select
             mode="multiple"
             // size={size}
-            options={projectMembers.map((item) => {
+            options={props.projectMembers?.map((item) => {
               return { value: item.userId, label: item.name }
             })}
             placeholder="Please select"
@@ -193,7 +193,7 @@ const createTaskFormik = withFormik({
 const mapStateToProps = (state) => {
   return {
     projectList: state.ProjectReducer.projectList,
-    projectMembers: state.ProjectReducer.projectMembers,
+    projectMembers: state.ProjectReducer.projectDetail.members,
     listPriority: state.PriorityReducer.listPriority,
     listStatus: state.StatusReducer.listStatus,
     listType: state.TypeReducer.listType

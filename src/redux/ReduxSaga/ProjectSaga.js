@@ -1,9 +1,9 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import { projectService } from '../../Services/ProjectService';
 import { STATUS_CODE } from '../../utils/constain/setting';
 import { history } from '../../utils/history';
 import { JiraNotification } from '../../utils/JiraNotification/JiraNotification';
-import { ADD_USER_PROJECT_SAGA, CLOSE_FORM_DRAWER, CREATE_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_MEMBERS, GET_PROJECT_MEMBERS_SAGA, REMOVE_USER_PROJECT_API, UPDATE_PROJECT_SAGA } from "../contains/contains";
+import { ADD_USER_PROJECT_SAGA, CLOSE_FORM_DRAWER, CREATE_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_DETAIL, GET_PROJECT_DETAIL_SAGA, HIDE_LOADER, REMOVE_USER_PROJECT_API, SHOW_LOADER, UPDATE_PROJECT_SAGA, UPDATE_STATUS_TASK_SAGA } from "../contains/contains";
 
 // Get all project
 function* getListProjectSaga() {
@@ -26,21 +26,25 @@ export function* listenGetListProjectSaga() {
 
 // Get project detail
 function* getProjectDetailSaga(action) {
+  yield put({type: SHOW_LOADER});
   try {
     let { data, status } = yield call(() => projectService.getProjectDetail(action.projectId));
     if (status === STATUS_CODE.SUCCESS) {
       yield put({
-        type: GET_PROJECT_MEMBERS,
-        projectMembers: data.content.members
+        type: GET_PROJECT_DETAIL,
+        projectDetail: data.content
       })
     }
   } catch (error) {
+    history.push('./projectManagement');
     console.log(error);
   }
+  yield delay(500);
+  yield put({type: HIDE_LOADER});
 }
 
 export function* listenGetProjectDetailSaga() {
-  yield takeLatest(GET_PROJECT_MEMBERS_SAGA, getProjectDetailSaga)
+  yield takeLatest(GET_PROJECT_DETAIL_SAGA, getProjectDetailSaga)
 }
 
 // Remove user all project
@@ -126,7 +130,7 @@ export function* listenUpdateProjectSaga() {
 // Create Project
 function* createProjectAuthorizationSaga(action) {
   try {
-    let {data, status} = yield call(()=>projectService.createProjectAuthorization(action.newProject))
+    let { data, status } = yield call(() => projectService.createProjectAuthorization(action.newProject))
     if (status === STATUS_CODE.SUCCESS) {
       JiraNotification('success', 'Create project successfully !');
       history.push('/')
@@ -139,4 +143,25 @@ function* createProjectAuthorizationSaga(action) {
 
 export function* listenCreateProjectAuthorizationSaga() {
   yield takeLatest(CREATE_PROJECT_SAGA, createProjectAuthorizationSaga);
+}
+
+// Update status task
+function* updateStatusTaskSaga(action) {
+  console.log("taskUpdateStatus", action.taskUpdateStatus);
+
+  try {
+    let { data, status } = yield call(() => projectService.updateStatusTask(action.taskUpdateStatus));
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put({
+        type: GET_PROJECT_DETAIL_SAGA,
+        projectId: action.taskUpdateStatus.projectId
+      })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export function* listenUpdateStatusTaskSaga() {
+  yield takeLatest(UPDATE_STATUS_TASK_SAGA, updateStatusTaskSaga);
 }

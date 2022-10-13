@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ADD_USER_PROJECT_SAGA, DELETE_PROJECT_SAGA, EDIT_PROJECT, GET_LIST_PROJECT_SAGA, GET_USER_SAGA, OPEN_FORM_DRAWER, REMOVE_USER_PROJECT_API } from "../../redux/contains/contains";
 import { FormOutlined, DeleteOutlined } from '@ant-design/icons'
 import EditProject from "../../Components/Form/EditProject/EditProject";
+import { NavLink } from "react-router-dom";
 
 export default function ProjectManagement() {
 
@@ -68,7 +69,10 @@ export default function ProjectManagement() {
         return 1;
       },
       ellipsis: true,
-      width: '20%'
+      width: '20%',
+      render: (text, record, index) => {
+        return <NavLink to={`/projectDetail/${record.id}`}>{text}</NavLink>
+      }
     },
     {
       title: 'Category',

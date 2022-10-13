@@ -4,7 +4,7 @@ import { withFormik } from "formik";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { CREATE_TASK_SAGA, GET_ALL_STATUS_SAGA, GET_PRIORITY_SAGA, GET_PROJECT_DETAIL_SAGA, GET_TYPE_SAGA, SET_SUBMIT_TASK } from "../../../redux/contains/contains";
+import { CREATE_TASK_SAGA, GET_ALL_STATUS_SAGA, GET_LIST_PROJECT_SAGA, GET_PRIORITY_SAGA, GET_PROJECT_DETAIL_SAGA, GET_TYPE_SAGA, SET_SUBMIT_TASK } from "../../../redux/contains/contains";
 
 function CreateTask(props) {
 
@@ -28,6 +28,7 @@ function CreateTask(props) {
   } = props;
 
   useEffect(() => {
+    dispatch({ type: GET_LIST_PROJECT_SAGA })
     dispatch({ type: GET_ALL_STATUS_SAGA });
     dispatch({ type: GET_PRIORITY_SAGA });
     dispatch({ type: GET_TYPE_SAGA });

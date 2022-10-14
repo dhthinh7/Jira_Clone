@@ -1,6 +1,7 @@
-import { GET_TASK_LIST } from "../contains/contains";
+import { CHANGE_ASSIGNES, CHANGE_TASK_MODAL, GET_TASK_LIST, REMOVE_USER_ASSIGN } from "../contains/contains";
 
 const initialState = {
+  // Data get from get task detail
   taskDetailModal: {
     "priorityTask":
     {
@@ -29,10 +30,17 @@ const initialState = {
 };
 
 export const TaskDetailReducer = (state = initialState, action) => {
-  console.log("mmmmmmmmm", action.taskDetailModal)
   switch (action.type) {
     case GET_TASK_LIST:
       return {...state, taskDetailModal: action.taskDetailModal};
+    case CHANGE_TASK_MODAL:
+      return {...state, taskDetailModal: {...state.taskDetailModal, [action.name] : action.value}};
+    case REMOVE_USER_ASSIGN:
+      state.taskDetailModal.assigness = [...state.taskDetailModal.assigness.filter(us => us.id !== action.userId)];
+      return {...state};
+    case CHANGE_ASSIGNES:
+      state.taskDetailModal.assigness = [...state.taskDetailModal.assigness, action.userSelected];
+      return {...state }
     default:
       return { ...state };
   }

@@ -12,6 +12,7 @@ class ProjectService extends baseServices {
   createProjectAuthorization = (objectProject) => this.post('Project/createProjectAuthorize', objectProject);
   updateStatusTask = (taskStatusUpdate) => this.put(`Project/updateStatus`, taskStatusUpdate);
   getTaskDetail = (taskId) => this.get(`Project/getTaskDetail?taskId=${taskId}`);
+  updateTask = (taskUpdate) => this.post(`Project/updateTask`, taskUpdate);
 }
 
 export const projectService = new ProjectService();

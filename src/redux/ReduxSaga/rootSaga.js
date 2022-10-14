@@ -2,7 +2,7 @@ import { all } from "redux-saga/effects"
 import { listenCreateTaskSaga } from "./CreatTaskSaga"
 import { listenPrioritySaga } from "./PrioritySaga"
 import { listenGetProjectCategoryService } from "./ProjectCategorySaga"
-import { listenAddUserProjectSaga, listenCreateProjectAuthorizationSaga, listenDeleteProjectSaga, listenGetListProjectSaga, listenGetProjectDetailLoadingSaga, listenGetProjectDetailSaga, listenGetTaskDetailSaga, listenRemoveUserSaga, listenUpdateProjectSaga, listenUpdateStatusTaskSaga } from "./ProjectSaga"
+import { listenAddUserProjectSaga, listenCreateProjectAuthorizationSaga, listenDeleteProjectSaga, listenGetListProjectSaga, listenGetProjectDetailLoadingSaga, listenGetProjectDetailSaga, listenGetTaskDetailSaga, listenRemoveUserSaga, listenUpdateProjectSaga, listenUpdateStatusTaskSaga, listenUpdateTaskSaga } from "./ProjectSaga"
 import { listenGetAllSaga } from "./StatusSaga"
 import { listenTypeGetAllSaga } from "./TypeSaga"
 import { listenGetUserSaga } from "./UserSaga"
@@ -26,5 +26,6 @@ export function* rootSaga() {
     listenUpdateStatusTaskSaga(),
     listenGetProjectDetailLoadingSaga(),
     listenGetTaskDetailSaga(),
+    listenUpdateTaskSaga(),
   ])
 }

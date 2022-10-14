@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   TypeReducer,
   ProjectCategoryReducer,
   LoadingReducer,
-  TaskDetailReducer
+  TaskDetailReducer,
 })
 
 const store = createStore(rootReducer, applyMiddleware(middleWareSaga));

@@ -139,6 +139,7 @@ export function* listenUpdateProjectSaga() {
 
 // Create Project
 function* createProjectAuthorizationSaga(action) {
+  yield put({type: SHOW_LOADER});
   try {
     let { data, status } = yield call(() => projectService.createProjectAuthorization(action.newProject))
     if (status === STATUS_CODE.SUCCESS) {
@@ -149,6 +150,8 @@ function* createProjectAuthorizationSaga(action) {
     JiraNotification('error', 'Create project fail !')
     console.log(error)
   }
+  yield delay(500)
+  yield put({type: HIDE_LOADER});
 }
 
 export function* listenCreateProjectAuthorizationSaga() {
@@ -157,8 +160,6 @@ export function* listenCreateProjectAuthorizationSaga() {
 
 // Update status task
 function* updateStatusTaskSaga(action) {
-  console.log("taskUpdateStatus", action.taskUpdateStatus);
-
   try {
     let { data, status } = yield call(() => projectService.updateStatusTask(action.taskUpdateStatus));
     if (status === STATUS_CODE.SUCCESS) {
@@ -180,9 +181,6 @@ export function* listenUpdateStatusTaskSaga() {
 function* getTaskDetailSaga(action) {
   try {
     let { data, status } = yield call(() => projectService.getTaskDetail(action.taskId));
-
-    console.log("data", data.content);
-
     if (status === STATUS_CODE.SUCCESS) {
       yield put({
         type: GET_TASK_LIST,
@@ -233,7 +231,6 @@ function* updateTaskSaga(action) {
     return user.id;
   });
   const taskUpdateApi = { ...taskDetailModal, listUserAsign }
-  console.log("taskUpdateApi", taskUpdateApi.assigness)
   try {
     let { data, status } = yield call(() => projectService.updateTask(taskUpdateApi));
     if (status === STATUS_CODE.SUCCESS) {
@@ -241,10 +238,6 @@ function* updateTaskSaga(action) {
         type: GET_PROJECT_DETAIL_SAGA,
         projectId: taskDetailModal.projectId
       })
-      // yield put({
-      //   type: GET_TASK_DETAIL_SAGA,
-      //   taskId: taskUpdateApi.taskId
-      // })
     }
   } catch (error) {
     console.log(error)

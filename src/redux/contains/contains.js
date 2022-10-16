@@ -31,6 +31,12 @@ export const UPDATE_PROJECT_SAGA = 'UPDATE_PROJECT_SAGA';
 // Category
 export const GET_ALL_PROJECT_CATEGORY_SAGA = 'GET_ALL_PROJECT_CATEGORY_SAGA';
 
+// Comments
+export const GET_ALL_COMMENTS_SAGA = 'GET_ALL_COMMENTS_SAGA';
+export const INSERT_COMMENT_SAGA = 'INSERT_COMMENT_SAGA';
+export const UPDATE_COMMENT_SAGA = 'UPDATE_COMMENT_SAGA';
+export const DELETE_COMMENT_SAGA = 'DELETE_COMMENT_SAGA';
+
 /************************* Action redux ***************************************/
 // Project
 export const GET_LIST_PROJECT = 'GET_LIST_PROJECT';
@@ -76,3 +82,6 @@ export const UPDATE_DESCRIPTION= 'UPDATE_DESCRIPTION';
 export const CHANGE_TASK_MODAL = 'CHANGE_TASK_MODAL';
 export const REMOVE_USER_ASSIGN = 'REMOVE_USER_ASSIGN';
 export const CHANGE_ASSIGNES = 'CHANGE_ASSIGNES';
+
+// Comment
+export const GET_ALL_COMMENTS = 'GET_ALL_COMMENTS';

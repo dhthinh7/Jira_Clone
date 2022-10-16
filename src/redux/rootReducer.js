@@ -10,6 +10,7 @@ import { TypeReducer } from './reducers/TypeReducer';
 import { ProjectCategoryReducer } from './reducers/ProjectCategoryReducer';
 import { LoadingReducer } from './reducers/LoadingReducer';
 import { TaskDetailReducer } from './reducers/TaskReducer';
+import { CommentReducer } from './reducers/CommentReducer';
 
 // Creat redux-saga
 const middleWareSaga = createMiddleWareSaga();
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   ProjectCategoryReducer,
   LoadingReducer,
   TaskDetailReducer,
+  CommentReducer,
 })
 
 const store = createStore(rootReducer, applyMiddleware(middleWareSaga));

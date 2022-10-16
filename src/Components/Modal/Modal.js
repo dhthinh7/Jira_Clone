@@ -2,28 +2,36 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { CHANGE_ASSIGNES, CHANGE_TASK_MODAL, GET_ALL_STATUS_SAGA, GET_PRIORITY_SAGA, GET_TYPE_SAGA, REMOVE_USER_ASSIGN, UPDATE_TASK_SAGA } from "../../redux/contains/contains";
+import { CHANGE_ASSIGNES, CHANGE_TASK_MODAL, DELETE_COMMENT, DELETE_COMMENT_SAGA, GET_ALL_COMMENTS_SAGA, GET_ALL_STATUS_SAGA, GET_PRIORITY_SAGA, GET_TYPE_SAGA, INSERT_COMMENT_SAGA, REMOVE_USER_ASSIGN, UPDATE_COMMENT_SAGA, UPDATE_TASK_SAGA } from "../../redux/contains/contains";
 import ReactHtmlParser from "react-html-parser";
 import { Editor } from "@tinymce/tinymce-react";
 import { Select } from "antd";
+import { USER_LOGIN } from "../../utils/constain/setting";
 
-export default function Modal() {
-
+export default function Modal(props) {
   const dispatch = useDispatch();
 
+  let buttonEdit = "hover:cursor-pointer duration-200";
   let { taskDetailModal } = useSelector(state => state.TaskDetailReducer);
   let { listType } = useSelector(state => state.TypeReducer);
   let { listStatus } = useSelector(state => state.StatusReducer);
   let { projectDetail } = useSelector(state => state.ProjectReducer);
   let { listPriority } = useSelector(state => state.PriorityReducer);
-  console.log("listPriority", listPriority);
+  let { listComments } = useSelector(state => state.CommentReducer);
+  // let { userLogin } = useSelector(state => state.UserReducer);
+  let userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
 
   const [visibleEditor, setVisibleEditor] = useState(false);
   // const [historyContent, setHistoryContent] = useState(taskDetailModal.description);
   const [content, setContent] = useState(taskDetailModal.description);
+  const [comment, setComment] = useState('');
+  const [commentEdit, setCommentEdit] = useState({
+    id: null,
+    contentEditing: comment
+  });
 
+  const [showButton, setShowButton] = useState(false);
 
-  console.log("dataaaaaaaaaaaaaaaaaaaaa", taskDetailModal)
   useEffect(() => {
     dispatch({ type: GET_TYPE_SAGA });
     dispatch({ type: GET_ALL_STATUS_SAGA });
@@ -36,7 +44,6 @@ export default function Modal() {
   }, [taskDetailModal])
 
   const handleChange = (e) => {
-    console.log("e,target", e.target)
     let { name, value } = e.target;
     dispatch({
       type: UPDATE_TASK_SAGA,
@@ -44,6 +51,17 @@ export default function Modal() {
       name: name,
       value: value
     })
+  }
+
+  const handleChangeComment = (e) => {
+    let { value } = e.target;
+    value ? setShowButton(true) : setShowButton(false);
+    setComment(value);
+
+  }
+
+  const handleChangeEdit = (e) => {
+    setCommentEdit({ ...commentEdit, contentEditing: e.target.value })
   }
 
   const renderDescription = () => {
@@ -119,9 +137,9 @@ export default function Modal() {
   }
 
   return (
-    <div className="modal fade show overflow-hidden" id="infoModal" tabIndex={-1} role="dialog" aria-labelledby="infoModal" aria-hidden="true">
+    <div className="modal fade show" id="infoModal" tabIndex={-1} role="dialog" aria-labelledby="infoModal" aria-hidden="true">
       <div className="modal-dialog modal-info max-w-5xl">
-        <div className="modal-content overflow-x-hidden overflow-y-auto p-3" style={{ maxHeight: '90vh' }}>
+        <div className="modal-content">
           <div className="modal-header">
             <div className="task-title">
               <i className="fa fa-bookmark" />
@@ -159,37 +177,74 @@ export default function Modal() {
                   <div className="comment">
                     <h6 className="my-3">Comment</h6>
                     <div className="block-comment" style={{ display: 'flex' }}>
-                      <div className="input-comment">
-                        <input type="text" placeholder="Add a comment ..." />
-                        <p>
-                          <span style={{ fontWeight: 500, color: 'gray' }}>Protip:</span><span>press<span style={{ fontWeight: 'bold', background: '#ecedf0', color: '#b4bac6' }}>M</span>to comment</span>
-                        </p>
+                      <div className="avatar mr-3">
+                        <img src='https://picsum.photos/40/40' className="rounded-full" alt='xyz' />
+                      </div>
+                      <div className="input-comment w-full">
+                        <input className="form-control" type="text" onChange={handleChangeComment} value={comment} placeholder="Add comment ..." />
+                        {showButton ? <div className="my-3 flex justify-end">
+                          <button type="button" className="btn btn-primary text-blue-800 mr-1" onClick={() => {
+                            dispatch({
+                              type: INSERT_COMMENT_SAGA,
+                              objectComment: {
+                                taskId: taskDetailModal.taskId,
+                                contentComment: comment
+                              }
+                            })
+                            setShowButton(false);
+                            setComment('');
+                          }}>Submit</button>
+                          <button type="button" className="btn btn-secondary text-blue-800" onClick={() => {
+                            setShowButton(false);
+                            setComment('');
+                          }}>Cancel</button>
+                        </div> : ''}
+                        {!showButton && <p className="mb-4">Type to comment</p>}
                       </div>
                     </div>
-                    <div className="lastest-comment">
-                      <div className="comment-item">
-                        <div className="display-comment" style={{ display: 'flex' }}>
-                          <div className="avatar mr-3">
-                            <img src="https://picsum.photos/70/70" alt='xyz' />
-                          </div>
-                          <div>
-                            <p style={{ marginBottom: 5 }}>
-                              Lord Gaben <span>a month ago</span>
-                            </p>
-                            <p style={{ marginBottom: 5 }}>
-                              Lorem ipsum dolor sit amet, consectetur
-                              adipisicing elit. Repellendus tempora ex
-                              voluptatum saepe ab officiis alias totam ad
-                              accusamus molestiae?
-                            </p>
-                            <div>
-                              <span style={{ color: '#929398' }}>Edit</span>
-                              •
-                              <span style={{ color: '#929398' }}>Delete</span>
+                    <div className="latest-comment">
+                      {listComments?.map((item, index) => {
+                        return <div key={index} className="comment-item mb-3">
+                          <div className={item.user.userId === userLogin.id ? "display-comment justify-end" : "display-comment"} style={{ display: 'flex' }}>
+                            <div className="avatar mr-3">
+                              <img src={item.user.avatar} className="rounded-full w-10" alt='xyz' />
+                            </div>
+                            {/* Align to right and format color when comment user is user login */}
+                            <div className={!(item.id === commentEdit.id) ? "max-w-3/4" : 'w-3/4'}>
+                              <p style={{ marginBottom: 5 }} className={item.user.userId === userLogin.id ? "text-blue-600 font-semibold break-words" : ''}>{item.user.name}</p>
+                              {!(item.id === commentEdit.id) ? <p key={index} style={{ marginBottom: 5 }}>{item.contentComment}</p> : <input className="form-control focus:shadow-none size text-sm w-full" type="text" onChange={handleChangeEdit} value={commentEdit.contentEditing} />}
+                              <div>
+                                {!(item.id === commentEdit.id) ? <>
+                                  <span className={buttonEdit + " hover:text-blue-700"} onClick={(e) => {
+                                    // Get id of item that was clicked and set initial contentEditing = item.contentComment
+                                    setCommentEdit({ ...commentEdit, id: item.id, contentEditing: item.contentComment })
+                                  }}>Edit</span> • <span className={buttonEdit + " hover:text-red-700"} onClick={() => {
+                                    dispatch({
+                                      type: DELETE_COMMENT_SAGA,
+                                      idComment: item.id,
+                                      taskId: taskDetailModal.taskId
+                                    })
+                                  }}>Delete</span>
+                                </> : <>
+                                  <span className={buttonEdit + " hover:text-blue-700"} onClick={() => {
+                                    // Reset id of commentEdit to null and dispatch action to saga
+                                    setCommentEdit({ ...commentEdit, id: null });
+                                    dispatch({
+                                      type: UPDATE_COMMENT_SAGA,
+                                      id: item.id,
+                                      contentComment: commentEdit.contentEditing,
+                                      taskId: taskDetailModal.taskId
+                                    });
+                                  }}>Confirm</span> • <span className={buttonEdit + " hover:text-red-700"} onClick={() => {
+                                    // Reset id of commentEdit to null
+                                    setCommentEdit({ ...commentEdit, id: null })
+                                  }}>Cancel</span>
+                                </>}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      })}
                     </div>
                   </div>
                 </div>

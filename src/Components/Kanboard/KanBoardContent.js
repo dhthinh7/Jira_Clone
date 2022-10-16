@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { GET_TASK_DETAIL_SAGA, SHOW_MODAL, UPDATE_STATUS_TASK_SAGA } from "../../redux/contains/contains";
+import { GET_ALL_COMMENTS_SAGA, GET_TASK_DETAIL_SAGA, UPDATE_STATUS_TASK_SAGA } from "../../redux/contains/contains";
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import './KanBoardContent.scss';
 
@@ -71,12 +71,13 @@ export default function KanBoardContent(props) {
                   {taskListDetail.lstTaskDeTail.map((task, index) => {
                     return <Draggable key={task.taskId.toString()} index={index} draggableId={JSON.stringify({ projectId: task.projectId, taskId: task.taskId })}>
                       {(provided) => {
-                        return <div 
+                        return <div
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                           key={index} className="list-group-item h-24" data-toggle="modal" data-target="#infoModal" onClick={() => {
                             dispatch({ type: GET_TASK_DETAIL_SAGA, taskId: task.taskId });
+                            dispatch({ type: GET_ALL_COMMENTS_SAGA, taskId: task.taskId });
                           }}>
                           <p className="font-weight-300">
                             {task.taskName}
@@ -88,8 +89,7 @@ export default function KanBoardContent(props) {
                             <div className="block-right">
                               <div className="avatar-group flex">
                                 {task.assigness.slice(0, 3).map((mem, index) => {
-                                  return <div className="avatar mr-1 hover:-translate-y-2 transition-transform duration-200
-                                  " key={index}>
+                                  return <div className="avatar mr-1 hover:-translate-y-2 transition-transform duration-200" key={index}>
                                     <img src={mem.avatar} alt={mem.avatar} className="w-8 rounded-full" />
                                   </div>
                                 })}

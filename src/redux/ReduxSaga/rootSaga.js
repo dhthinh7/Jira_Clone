@@ -1,4 +1,5 @@
 import { all } from "redux-saga/effects"
+import { listenDeleteCommentSaga, listenGetAllCommentsSaga, listenInsertComment, listenUpdateCommentSaga } from "./CommentSaga"
 import { listenCreateTaskSaga } from "./CreatTaskSaga"
 import { listenPrioritySaga } from "./PrioritySaga"
 import { listenGetProjectCategoryService } from "./ProjectCategorySaga"
@@ -27,5 +28,9 @@ export function* rootSaga() {
     listenGetProjectDetailLoadingSaga(),
     listenGetTaskDetailSaga(),
     listenUpdateTaskSaga(),
+    listenGetAllCommentsSaga(),
+    listenInsertComment(),
+    listenUpdateCommentSaga(),
+    listenDeleteCommentSaga()
   ])
 }

@@ -22,7 +22,7 @@ export default function JiraMainTemplate(props) {
         <MenuMain />
         <Component {...propsRoute} />
         {/* <Modal /> */}
-      </MainJiraTemplate>;
+      </MainJiraTemplate>
 
     </>
   })}>

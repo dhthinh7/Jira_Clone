@@ -128,7 +128,7 @@ export default function ProjectManagement() {
                   {text.members?.map((item, index) => {
                     return <tr key={index}>
                       <td>{item.userId}</td>
-                      <td><img src={item.avatar} width="30" height="30" style={{ borderRadius: '15px' }} /></td>
+                      <td><img src={item.avatar} width="30" height="30" style={{ borderRadius: '15px'}} /></td>
                       <td>{item.name}</td>
                       <td>
                         <button onClick={() => {

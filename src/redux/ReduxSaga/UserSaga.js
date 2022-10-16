@@ -5,6 +5,7 @@ import { userServices } from "../../Services/UserService";
 import { STATUS_CODE } from "../../utils/constain/setting";
 import { ADD_USER_PROJECT_SAGA, GET_LIST_PROJECT_SAGA, GET_USER, GET_USER_SAGA } from "../contains/contains";
 
+// Get all user
 function *getUserSaga(action) {
   try {
     const {data, status} = yield call(()=>userServices.getUser(action.keyword))
@@ -23,4 +24,6 @@ function *getUserSaga(action) {
 export function *listenGetUserSaga() {
   yield takeLatest(GET_USER_SAGA, getUserSaga);
 }
+
+// Login
 

@@ -7,6 +7,7 @@ import JiraMainTemplate from './Templates/JiraMainTemplate';
 import ProjectManagement from './Pages/ProjectManagement/ProjectManagement'
 import Loading from './Components/Loading/Loading';
 import Modal from './Components/Modal/Modal';
+import Login from './Pages/Login/Login';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <MenuMain/>
           Test
         </Route> */}
+        <Route exact path="/login" component={Login}/>
         <JiraMainTemplate exact path="/" Component={ProjectManagement} />
         <JiraMainTemplate exact path="/projectManagement" Component={ProjectManagement} />
         <JiraMainTemplate exact path="/createProject" Component={CreateProject} />

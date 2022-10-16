@@ -37,6 +37,9 @@ export const INSERT_COMMENT_SAGA = 'INSERT_COMMENT_SAGA';
 export const UPDATE_COMMENT_SAGA = 'UPDATE_COMMENT_SAGA';
 export const DELETE_COMMENT_SAGA = 'DELETE_COMMENT_SAGA';
 
+// Login
+export const USER_SIGN_IN_SAGA = 'USER_SIGN_IN_SAGA';
+
 /************************* Action redux ***************************************/
 // Project
 export const GET_LIST_PROJECT = 'GET_LIST_PROJECT';

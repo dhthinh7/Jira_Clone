@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import HeaderDetail from "../../Components/Kanboard/HeaderDetail";
 import KanboardInfor from "../../Components/Kanboard/KanboardInfor";
 import KanBoardContent from "../../Components/Kanboard/KanBoardContent";
-import { GET_PROJECT_DETAIL_SAGA } from "../../redux/contains/contains";
+import { GET_PROJECT_DETAIL_SHOW_LOADING_ONE_TIME } from "../../redux/contains/contains";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Kanboard(props) {
@@ -12,7 +12,7 @@ export default function Kanboard(props) {
   useEffect(() => {
     let { projectId } = props.match.params;
     dispatch({
-      type: GET_PROJECT_DETAIL_SAGA,
+      type: GET_PROJECT_DETAIL_SHOW_LOADING_ONE_TIME,
       projectId
     })
   }, []);

@@ -1,9 +1,9 @@
-import { call, delay, put, takeLatest } from 'redux-saga/effects';
+import { call, delay, put, select, takeLatest } from 'redux-saga/effects';
 import { projectService } from '../../Services/ProjectService';
 import { STATUS_CODE } from '../../utils/constain/setting';
 import { history } from '../../utils/history';
 import { JiraNotification } from '../../utils/JiraNotification/JiraNotification';
-import { ADD_USER_PROJECT_SAGA, CLOSE_FORM_DRAWER, CREATE_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_DETAIL, GET_PROJECT_DETAIL_SAGA, HIDE_LOADER, REMOVE_USER_PROJECT_API, SHOW_LOADER, UPDATE_PROJECT_SAGA, UPDATE_STATUS_TASK_SAGA } from "../contains/contains";
+import { ADD_USER_PROJECT_SAGA, CHANGE_ASSIGNES, CHANGE_TASK_MODAL, CLOSE_FORM_DRAWER, CREATE_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_DETAIL, GET_PROJECT_DETAIL_SAGA, GET_PROJECT_DETAIL_SHOW_LOADING_ONE_TIME, GET_TASK_DETAIL_SAGA, GET_TASK_LIST, HIDE_LOADER, REMOVE_USER_ASSIGN, REMOVE_USER_PROJECT_API, SHOW_LOADER, UPDATE_PROJECT_SAGA, UPDATE_STATUS_TASK_SAGA, UPDATE_TASK_SAGA } from "../contains/contains";
 
 // Get all project
 function* getListProjectSaga() {
@@ -26,7 +26,6 @@ export function* listenGetListProjectSaga() {
 
 // Get project detail
 function* getProjectDetailSaga(action) {
-  yield put({type: SHOW_LOADER});
   try {
     let { data, status } = yield call(() => projectService.getProjectDetail(action.projectId));
     if (status === STATUS_CODE.SUCCESS) {
@@ -39,12 +38,23 @@ function* getProjectDetailSaga(action) {
     history.push('./projectManagement');
     console.log(error);
   }
-  yield delay(500);
-  yield put({type: HIDE_LOADER});
 }
 
 export function* listenGetProjectDetailSaga() {
   yield takeLatest(GET_PROJECT_DETAIL_SAGA, getProjectDetailSaga)
+}
+
+// Get project detail and show loading only one time
+function* getProjectDetailLoadingSaga(action) {
+  let { projectId } = action;
+  yield put({ type: SHOW_LOADER });
+  yield put({ type: GET_PROJECT_DETAIL_SAGA, projectId });
+  yield delay(500);
+  yield put({ type: HIDE_LOADER });
+}
+
+export function* listenGetProjectDetailLoadingSaga() {
+  yield takeLatest(GET_PROJECT_DETAIL_SHOW_LOADING_ONE_TIME, getProjectDetailLoadingSaga)
 }
 
 // Remove user all project
@@ -129,6 +139,7 @@ export function* listenUpdateProjectSaga() {
 
 // Create Project
 function* createProjectAuthorizationSaga(action) {
+  yield put({type: SHOW_LOADER});
   try {
     let { data, status } = yield call(() => projectService.createProjectAuthorization(action.newProject))
     if (status === STATUS_CODE.SUCCESS) {
@@ -139,6 +150,8 @@ function* createProjectAuthorizationSaga(action) {
     JiraNotification('error', 'Create project fail !')
     console.log(error)
   }
+  yield delay(500)
+  yield put({type: HIDE_LOADER});
 }
 
 export function* listenCreateProjectAuthorizationSaga() {
@@ -147,8 +160,6 @@ export function* listenCreateProjectAuthorizationSaga() {
 
 // Update status task
 function* updateStatusTaskSaga(action) {
-  console.log("taskUpdateStatus", action.taskUpdateStatus);
-
   try {
     let { data, status } = yield call(() => projectService.updateStatusTask(action.taskUpdateStatus));
     if (status === STATUS_CODE.SUCCESS) {
@@ -164,4 +175,75 @@ function* updateStatusTaskSaga(action) {
 
 export function* listenUpdateStatusTaskSaga() {
   yield takeLatest(UPDATE_STATUS_TASK_SAGA, updateStatusTaskSaga);
+}
+
+// Get Task detail
+function* getTaskDetailSaga(action) {
+  try {
+    let { data, status } = yield call(() => projectService.getTaskDetail(action.taskId));
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put({
+        type: GET_TASK_LIST,
+        taskDetailModal: data.content
+      })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export function* listenGetTaskDetailSaga() {
+  yield takeLatest(GET_TASK_DETAIL_SAGA, getTaskDetailSaga);
+}
+
+// Update task
+function* updateTaskSaga(action) {
+  switch (action.actionType) {
+    case CHANGE_TASK_MODAL:
+      const { name, value } = action
+      yield put({
+        type: CHANGE_TASK_MODAL,
+        name,
+        value
+      })
+      break;
+    case REMOVE_USER_ASSIGN:
+      const { userId } = action;
+      yield put({
+        type: REMOVE_USER_ASSIGN,
+        userId
+      });
+      break;
+    case CHANGE_ASSIGNES:
+      const { userSelected } = action;
+      yield put({
+        type: CHANGE_ASSIGNES,
+        userSelected
+      });
+      break;
+    default:
+      break;
+  }
+
+  // Prepare data to as object that load to API
+  let { taskDetailModal } = yield select(state => state.TaskDetailReducer);
+  const listUserAsign = taskDetailModal.assigness?.map((user, index) => {
+    return user.id;
+  });
+  const taskUpdateApi = { ...taskDetailModal, listUserAsign }
+  try {
+    let { data, status } = yield call(() => projectService.updateTask(taskUpdateApi));
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put({
+        type: GET_PROJECT_DETAIL_SAGA,
+        projectId: taskDetailModal.projectId
+      })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export function* listenUpdateTaskSaga() {
+  yield takeLatest(UPDATE_TASK_SAGA, updateTaskSaga);
 }

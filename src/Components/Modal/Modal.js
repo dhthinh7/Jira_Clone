@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { CHANGE_ASSIGNES, CHANGE_TASK_MODAL, DELETE_COMMENT, DELETE_COMMENT_SAGA, GET_ALL_COMMENTS_SAGA, GET_ALL_STATUS_SAGA, GET_PRIORITY_SAGA, GET_TYPE_SAGA, INSERT_COMMENT_SAGA, REMOVE_USER_ASSIGN, UPDATE_COMMENT_SAGA, UPDATE_TASK_SAGA } from "../../redux/contains/contains";
+import { CHANGE_ASSIGNES, CHANGE_TASK_MODAL, DELETE_COMMENT_SAGA, GET_ALL_STATUS_SAGA, GET_PRIORITY_SAGA, GET_TYPE_SAGA, INSERT_COMMENT_SAGA, REMOVE_USER_ASSIGN, UPDATE_COMMENT_SAGA, UPDATE_TASK_SAGA } from "../../redux/contains/contains";
 import ReactHtmlParser from "react-html-parser";
 import { Editor } from "@tinymce/tinymce-react";
 import { Select } from "antd";
@@ -18,11 +18,9 @@ export default function Modal(props) {
   let { projectDetail } = useSelector(state => state.ProjectReducer);
   let { listPriority } = useSelector(state => state.PriorityReducer);
   let { listComments } = useSelector(state => state.CommentReducer);
-  // let { userLogin } = useSelector(state => state.UserReducer);
   let userLogin = JSON.parse(localStorage.getItem(USER_LOGIN));
 
   const [visibleEditor, setVisibleEditor] = useState(false);
-  // const [historyContent, setHistoryContent] = useState(taskDetailModal.description);
   const [content, setContent] = useState(taskDetailModal.description);
   const [comment, setComment] = useState('');
   const [commentEdit, setCommentEdit] = useState({
@@ -80,9 +78,7 @@ export default function Modal(props) {
             'insertdatetime media table paste code help wordcount'
           ],
           toolbar:
-            'undo redo | formatselect | bold italic backcolor | \
-                        alignleft aligncenter alignright alignjustify | \
-                        bullist numlist outdent indent | removeformat | help'
+            'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
         }}
         onEditorChange={(content, editor) => {
           setContent(content);
@@ -178,7 +174,7 @@ export default function Modal(props) {
                     <h6 className="my-3">Comment</h6>
                     <div className="block-comment" style={{ display: 'flex' }}>
                       <div className="avatar mr-3">
-                        <img src='https://picsum.photos/40/40' className="rounded-full" alt='xyz' />
+                        <img src={userLogin?.avatar} className="rounded-full" alt='xyz' />
                       </div>
                       <div className="input-comment w-full">
                         <input className="form-control" type="text" onChange={handleChangeComment} value={comment} placeholder="Add comment ..." />
@@ -205,13 +201,13 @@ export default function Modal(props) {
                     <div className="latest-comment">
                       {listComments?.map((item, index) => {
                         return <div key={index} className="comment-item mb-3">
-                          <div className={item.user.userId === userLogin.id ? "display-comment justify-end" : "display-comment"} style={{ display: 'flex' }}>
+                          <div className={item.user.userId === userLogin?.id ? "display-comment justify-end" : "display-comment"} style={{ display: 'flex' }}>
                             <div className="avatar mr-3">
                               <img src={item.user.avatar} className="rounded-full w-10" alt='xyz' />
                             </div>
                             {/* Align to right and format color when comment user is user login */}
                             <div className={!(item.id === commentEdit.id) ? "max-w-3/4" : 'w-3/4'}>
-                              <p style={{ marginBottom: 5 }} className={item.user.userId === userLogin.id ? "text-blue-600 font-semibold break-words" : ''}>{item.user.name}</p>
+                              <p style={{ marginBottom: 5 }} className={item.user.userId === userLogin?.id ? "text-blue-600 font-semibold break-words" : 'font-semibold'}>{item.user.name}</p>
                               {!(item.id === commentEdit.id) ? <p key={index} style={{ marginBottom: 5 }}>{item.contentComment}</p> : <input className="form-control focus:shadow-none size text-sm w-full" type="text" onChange={handleChangeEdit} value={commentEdit.contentEditing} />}
                               <div>
                                 {!(item.id === commentEdit.id) ? <>
@@ -312,7 +308,7 @@ export default function Modal(props) {
                     <h6 className="my-3">REPORTER</h6>
                     <div className="item flex align-middle">
                       <div className="avatar">
-                        <img src='https://picsum.photos/50/50' alt='xyz' className="rounded-full mr-3" />
+                        <img src={userLogin?.avatar} alt='xyz' className="rounded-full mr-3 w-12 items-center" />
                       </div>
                       <p className="name text-lg m-0">{projectDetail.creator?.name}</p>
                     </div>

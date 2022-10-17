@@ -42,6 +42,7 @@ export const USER_SIGN_IN_SAGA = 'USER_SIGN_IN_SAGA';
 
 // Signup
 export const LINK_TO_SIGNUP_EFFECT_SAGA = 'LINK_TO_SIGNUP_EFFECT_SAGA';
+export const USER_SIGN_UP_SAGA = 'USER_SIGN_UP_SAGA';
 
 /************************* Action redux ***************************************/
 // Project

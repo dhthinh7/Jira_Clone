@@ -189,7 +189,7 @@ export default function Modal(props) {
                             })
                             setShowButton(false);
                             setComment('');
-                          }}>Submit</button>
+                          }}>Save</button>
                           <button type="button" className="btn btn-secondary text-blue-800" onClick={() => {
                             setShowButton(false);
                             setComment('');

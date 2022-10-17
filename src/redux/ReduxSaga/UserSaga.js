@@ -4,7 +4,7 @@ import { call, put, takeLatest, delay } from "redux-saga/effects";
 import { userServices } from "../../Services/UserService";
 import { STATUS_CODE, TOKEN, USER_LOGIN } from "../../utils/constain/setting";
 import { history } from "../../utils/history";
-import { GET_USER, GET_USER_SAGA, HIDE_LOADER, LINK_TO_SIGNUP_EFFECT_SAGA, SHOW_LOADER, USER_SIGN_IN_SAGA } from "../contains/contains";
+import { GET_USER, GET_USER_SAGA, HIDE_LOADER, LINK_TO_SIGNUP_EFFECT_SAGA, SHOW_LOADER, USER_SIGN_IN_SAGA, USER_SIGN_UP_SAGA } from "../contains/contains";
 
 // Get all user
 function* getUserSaga(action) {
@@ -63,4 +63,23 @@ function* linkToSignupLoader() {
 
 export function* listenLinkToSignupLoader() {
   yield takeLatest(LINK_TO_SIGNUP_EFFECT_SAGA, linkToSignupLoader);
+}
+
+// Signup
+function* signupSaga(action) {
+  yield put({type: SHOW_LOADER});
+  try {
+    const {data, status} = yield call(()=>userServices.signUpUser(action.userSignup));
+    if (status === STATUS_CODE.SUCCESS) {
+      history.push('/login');
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  yield delay(300);
+  yield put({type: HIDE_LOADER});
+}
+
+export function* listenSignupSaga() {
+  yield takeLatest(USER_SIGN_UP_SAGA, signupSaga);
 }

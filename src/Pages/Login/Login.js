@@ -4,7 +4,7 @@ import { UserOutlined, LockOutlined, TwitterOutlined } from '@ant-design/icons';
 import { withFormik, Formik } from 'formik'
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
-import { LINK_TO_SIGNUP_EFFECT_SAGA, USER_SIGN_IN_SAGA } from '../../redux/contains/contains';
+import { LINK_TO_EFFECT_LOADER_SAGA, SIGNUP, USER_SIGN_IN_SAGA } from '../../redux/contains/contains';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 function LoginPage(props) {
@@ -32,14 +32,15 @@ function LoginPage(props) {
         </div>
         <div className="text-danger">{errors.password}</div>
         <div className="flex justify-between w-full">
-          <Button htmlType="submit" size="large" style={{ minWidth: '50%', backgroundColor: 'rgb(102,117,223)', color: '#fff' }} className="mt-5">Login</Button>
-          <Button size="large" style={{ minWidth: '50%', backgroundColor: 'rgb(102,117,223, 70%)', color: '#fff' }} className="mt-5 w-1/2" onClick={() => {
+          <Button htmlType="submit" size="large" style={{ minWidth: '48%', backgroundColor: 'rgb(102,117,223)', color: '#fff' }} className="mt-5 border-0">Login</Button>
+          <Button size="large" style={{ minWidth: '48%', backgroundColor: 'rgb(102,117,223, 70%)', color: '#fff' }} className="mt-5 w-1/2 border-0" onClick={() => {
             dispatch({
-              type: LINK_TO_SIGNUP_EFFECT_SAGA
+              type: LINK_TO_EFFECT_LOADER_SAGA,
+              actionType: SIGNUP
             })
           }}>Create new account</Button>
         </div>
-        {/* <Button size="large" style={{ minWidth: 300, backgroundColor: 'rgb(102,117,223)', color: '#fff' }} className="mt-5">Login</Button> */}
+        <NavLink to="/">Back to home <i className="fa fa-long-arrow-alt-left mt-3"></i></NavLink>
         <div className="social mt-3 d-flex">
           <Button style={{ backgroundColor: 'rgb(59,89,152)' }} shape="circle" size={"large"}>
             <span className="font-weight-bold" style={{ color: '#fff' }} >F</span>

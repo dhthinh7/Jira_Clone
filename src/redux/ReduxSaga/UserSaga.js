@@ -4,7 +4,7 @@ import { call, put, takeLatest, delay } from "redux-saga/effects";
 import { userServices } from "../../Services/UserService";
 import { STATUS_CODE, TOKEN, USER_LOGIN } from "../../utils/constain/setting";
 import { history } from "../../utils/history";
-import { GET_USER, GET_USER_SAGA, HIDE_LOADER, LINK_TO_SIGNUP_EFFECT_SAGA, SHOW_LOADER, USER_SIGN_IN_SAGA, USER_SIGN_UP_SAGA } from "../contains/contains";
+import { GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_USER, GET_USER_SAGA, HIDE_LOADER, LINK_TO_EFFECT_LOADER_SAGA, LINK_TO_SIGNUP_EFFECT_SAGA, LOGOUT_SAGA, SHOW_LOADER, SIGNIN, SIGNUP, USER_SIGN_IN_SAGA, USER_SIGN_UP_SAGA } from "../contains/contains";
 
 // Get all user
 function* getUserSaga(action) {
@@ -54,22 +54,31 @@ export function* listenSignInUserSaga() {
 }
 
 // Link to signup
-function* linkToSignupLoader() {
-  yield put({type: SHOW_LOADER});
-  history.push('/signup');
+function* linkToSignupLoader(action) {
+  yield put({ type: SHOW_LOADER });
+  switch (action.actionType) {
+    case SIGNIN:
+      history.push('/login');
+      break;
+    case SIGNUP:
+      history.push('/signup');
+      break;
+    default:
+      break;
+  }
   yield delay(300);
-  yield put({type: HIDE_LOADER});
+  yield put({ type: HIDE_LOADER });
 }
 
 export function* listenLinkToSignupLoader() {
-  yield takeLatest(LINK_TO_SIGNUP_EFFECT_SAGA, linkToSignupLoader);
+  yield takeLatest(LINK_TO_EFFECT_LOADER_SAGA, linkToSignupLoader);
 }
 
 // Signup
 function* signupSaga(action) {
-  yield put({type: SHOW_LOADER});
+  yield put({ type: SHOW_LOADER });
   try {
-    const {data, status} = yield call(()=>userServices.signUpUser(action.userSignup));
+    const { data, status } = yield call(() => userServices.signUpUser(action.userSignup));
     if (status === STATUS_CODE.SUCCESS) {
       history.push('/login');
     }
@@ -77,9 +86,28 @@ function* signupSaga(action) {
     console.log(error);
   }
   yield delay(300);
-  yield put({type: HIDE_LOADER});
+  yield put({ type: HIDE_LOADER });
 }
 
 export function* listenSignupSaga() {
   yield takeLatest(USER_SIGN_UP_SAGA, signupSaga);
+}
+
+// Logout
+function* logoutSaga() {
+  yield put({ type: SHOW_LOADER });
+  yield localStorage.removeItem(TOKEN);
+  yield localStorage.removeItem(USER_LOGIN);
+  if (localStorage.getItem(TOKEN) === null) {
+    yield put({
+      type: GET_LIST_PROJECT_SAGA
+    })
+    history.push('/');
+  }
+  yield delay(500);
+  yield put({ type: HIDE_LOADER });
+}
+
+export function* listenLogoutSaga() {
+  yield takeLatest(LOGOUT_SAGA, logoutSaga);
 }

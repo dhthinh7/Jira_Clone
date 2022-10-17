@@ -41,8 +41,13 @@ export const DELETE_COMMENT_SAGA = 'DELETE_COMMENT_SAGA';
 export const USER_SIGN_IN_SAGA = 'USER_SIGN_IN_SAGA';
 
 // Signup
-export const LINK_TO_SIGNUP_EFFECT_SAGA = 'LINK_TO_SIGNUP_EFFECT_SAGA';
+export const LINK_TO_EFFECT_LOADER_SAGA = 'LINK_TO_EFFECT_LOADER_SAGA';
 export const USER_SIGN_UP_SAGA = 'USER_SIGN_UP_SAGA';
+export const SIGNIN = 'SIGNIN';
+export const SIGNUP = 'SIGNUP';
+
+// Logout
+export const LOGOUT_SAGA = 'LOGOUT_SAGA';
 
 /************************* Action redux ***************************************/
 // Project
@@ -85,7 +90,7 @@ export const GET_PROJECT_DETAIL_SHOW_LOADING_ONE_TIME = 'GET_PROJECT_DETAIL_SHOW
 // Modal
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
-export const UPDATE_DESCRIPTION= 'UPDATE_DESCRIPTION';
+export const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION';
 export const CHANGE_TASK_MODAL = 'CHANGE_TASK_MODAL';
 export const REMOVE_USER_ASSIGN = 'REMOVE_USER_ASSIGN';
 export const CHANGE_ASSIGNES = 'CHANGE_ASSIGNES';

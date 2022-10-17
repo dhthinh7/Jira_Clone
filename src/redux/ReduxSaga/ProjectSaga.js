@@ -19,6 +19,11 @@ function* getListProjectSaga() {
     } catch (err) {
       console.log(err);
     }
+  } else {
+    yield put({
+      type: GET_LIST_PROJECT,
+      projectList: []
+    })
   }
 }
 

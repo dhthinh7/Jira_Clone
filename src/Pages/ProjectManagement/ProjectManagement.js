@@ -182,7 +182,7 @@ export default function ProjectManagement() {
       title: 'Action',
       dataIndex: '',
       key: 'action',
-      sorter: (a, b) => a.address.length - b.address.length,
+      // sorter: (a, b) => a.address.length - b.address.length,
       ellipsis: true,
       render: (text, record, index) => {
         return <div>
@@ -225,7 +225,7 @@ export default function ProjectManagement() {
 
   ];
 
-  return <div className="ml-72 p-16 w-full">
+  return <div className="">
     <h1 className="font-semibold">Project management</h1>
     <Table className="p-4" tableLayout="fixed" columns={columns} rowKey={"id"} dataSource={projectList} onChange={handleChange} />
   </div>;

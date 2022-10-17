@@ -37,8 +37,9 @@ function LoginPage(props) {
         </div>
         <div className="text-danger">{errors.passWord}</div>
         <div className="flex justify-between w-full">
-          <Button htmlType="submit" size="large" style={{ minWidth: '100%', backgroundColor: 'rgb(102,117,223)', color: '#fff' }} className="mt-5">Signup</Button>
+          <Button htmlType="submit" size="large" style={{ minWidth: '100%', backgroundColor: 'rgb(102,117,223)', color: '#fff' }} className="mt-5 border-0">Signup</Button>
         </div>
+        <NavLink to="/login">Back to login <i className="fa fa-long-arrow-alt-left mt-3"></i></NavLink>
       </div>
     </form>
   )

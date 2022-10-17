@@ -1,22 +1,24 @@
 import { call, delay, put, select, takeLatest } from 'redux-saga/effects';
 import { projectService } from '../../Services/ProjectService';
-import { STATUS_CODE } from '../../utils/constain/setting';
+import { STATUS_CODE, USER_LOGIN } from '../../utils/constain/setting';
 import { history } from '../../utils/history';
 import { JiraNotification } from '../../utils/JiraNotification/JiraNotification';
 import { ADD_USER_PROJECT_SAGA, CHANGE_ASSIGNES, CHANGE_TASK_MODAL, CLOSE_FORM_DRAWER, CREATE_PROJECT_SAGA, DELETE_PROJECT_SAGA, GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_PROJECT_DETAIL, GET_PROJECT_DETAIL_SAGA, GET_PROJECT_DETAIL_SHOW_LOADING_ONE_TIME, GET_TASK_DETAIL_SAGA, GET_TASK_LIST, HIDE_LOADER, REMOVE_USER_ASSIGN, REMOVE_USER_PROJECT_API, SHOW_LOADER, UPDATE_PROJECT_SAGA, UPDATE_STATUS_TASK_SAGA, UPDATE_TASK_SAGA } from "../contains/contains";
 
 // Get all project
 function* getListProjectSaga() {
-  try {
-    const { data, status } = yield call(() => projectService.getAllProject());
-    if (status === STATUS_CODE.SUCCESS) {
-      yield put({
-        type: GET_LIST_PROJECT,
-        projectList: data.content
-      })
+  if (localStorage.getItem(USER_LOGIN)) {
+    try {
+      const { data, status } = yield call(() => projectService.getAllProject());
+      if (status === STATUS_CODE.SUCCESS) {
+        yield put({
+          type: GET_LIST_PROJECT,
+          projectList: data.content
+        })
+      }
+    } catch (err) {
+      console.log(err);
     }
-  } catch (err) {
-    console.log(err);
   }
 }
 
@@ -48,8 +50,12 @@ export function* listenGetProjectDetailSaga() {
 function* getProjectDetailLoadingSaga(action) {
   let { projectId } = action;
   yield put({ type: SHOW_LOADER });
-  yield put({ type: GET_PROJECT_DETAIL_SAGA, projectId });
-  yield delay(500);
+  if (localStorage.getItem(USER_LOGIN)) {
+    yield put({ type: GET_PROJECT_DETAIL_SAGA, projectId });
+  } else {
+    history.push('login');
+  }
+  yield delay(300);
   yield put({ type: HIDE_LOADER });
 }
 
@@ -150,7 +156,7 @@ function* createProjectAuthorizationSaga(action) {
     JiraNotification('error', 'Create project fail !')
     console.log(error)
   }
-  yield delay(500)
+  yield delay(300)
   yield put({type: HIDE_LOADER});
 }
 

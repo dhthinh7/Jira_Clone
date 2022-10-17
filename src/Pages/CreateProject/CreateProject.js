@@ -5,7 +5,9 @@ import * as yup from 'yup';
 import { Editor } from '@tinymce/tinymce-react';
 import { connect, useDispatch } from "react-redux";
 import { withFormik } from "formik";
-import { CREATE_PROJECT_SAGA, GET_ALL_PROJECT_CATEGORY_SAGA } from "../../redux/contains/contains";
+import { CREATE_PROJECT_SAGA, GET_ALL_PROJECT_CATEGORY_SAGA, HIDE_LOADER, SHOW_LOADER } from "../../redux/contains/contains";
+import { USER_LOGIN } from "../../utils/constain/setting";
+import { history } from "../../utils/history";
 
 function CreateProject(props) {
 
@@ -22,9 +24,17 @@ function CreateProject(props) {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({
-      type: GET_ALL_PROJECT_CATEGORY_SAGA
-    })
+    if (localStorage.getItem(USER_LOGIN)) {
+      dispatch({
+        type: GET_ALL_PROJECT_CATEGORY_SAGA
+      })
+    } else {
+      dispatch({type: SHOW_LOADER});
+      history.push('login');
+      setTimeout(() => {
+        dispatch({type: HIDE_LOADER});
+      }, 300);
+    }
   }, []);
 
   return <div className="jr-createPro ml-72 px-16 pt-10 w-full">

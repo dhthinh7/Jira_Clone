@@ -63,13 +63,14 @@ export function* listenUpdateCommentSaga() {
 // Delete comment
 function* deleteCommentSaga(action) {
   try {
-    let {data, status} = yield call(()=>commentServices.deleteComment(action.idComment));
-    if (status === STATUS_CODE.SUCCESS) {
-      window.confirm("This comment will be deleted");
-      yield put({
-        type: GET_ALL_COMMENTS_SAGA,
-        taskId: action.taskId
-      })
+    if (window.confirm("This comment will be deleted")) {
+      let { data, status } = yield call(() => commentServices.deleteComment(action.idComment));
+      if (status === STATUS_CODE.SUCCESS) {
+        yield put({
+          type: GET_ALL_COMMENTS_SAGA,
+          taskId: action.taskId
+        })
+      }
     }
   } catch (error) {
     console.log(error)

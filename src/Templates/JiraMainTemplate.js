@@ -21,9 +21,9 @@ export default function JiraMainTemplate(props) {
       <MainJiraTemplate className="jira flex">
         <SidebarLeft />
         <MenuMain />
-        <div className="ml-72 px-16 pt-4 w-full">
-          <HeaderAccount/>
-        <Component {...propsRoute} />
+        <div className="ml-72 px-16 pt-4 w-full overflow-x-hidden overflow-y-auto">
+          <HeaderAccount />
+          <Component {...propsRoute} />
         </div>
         {/* <Modal /> */}
       </MainJiraTemplate>

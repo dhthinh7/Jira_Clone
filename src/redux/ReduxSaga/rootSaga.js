@@ -6,7 +6,7 @@ import { listenGetProjectCategoryService } from "./ProjectCategorySaga"
 import { listenAddUserProjectSaga, listenCreateProjectAuthorizationSaga, listenDeleteProjectSaga, listenGetListProjectSaga, listenGetProjectDetailLoadingSaga, listenGetProjectDetailSaga, listenGetTaskDetailSaga, listenRemoveUserSaga, listenUpdateProjectSaga, listenUpdateStatusTaskSaga, listenUpdateTaskSaga } from "./ProjectSaga"
 import { listenGetAllSaga } from "./StatusSaga"
 import { listenTypeGetAllSaga } from "./TypeSaga"
-import { listenGetUserSaga, listenLinkToSignupLoader, listenLogoutSaga, listenSignInUserSaga, listenSignupSaga } from "./UserSaga"
+import { listenDeleteUser, listenEditUser, listenGetUserSaga, listenLinkToSignupLoader, listenLogoutSaga, listenSignInUserSaga, listenSignupSaga } from "./UserSaga"
 
 export function* rootSaga() {
   yield all([
@@ -35,6 +35,8 @@ export function* rootSaga() {
     listenSignInUserSaga(),
     listenLinkToSignupLoader(),
     listenSignupSaga(),
-    listenLogoutSaga()
+    listenLogoutSaga(),
+    listenEditUser(),
+    listenDeleteUser()
   ])
 }

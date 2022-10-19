@@ -9,11 +9,8 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 function LoginPage(props) {
   const {
-    values,
-    touched,
     errors,
     handleChange,
-    handleBlur,
     handleSubmit,
   } = props;
 

@@ -9,20 +9,17 @@ import Loading from './Components/Loading/Loading';
 import Modal from './Components/Modal/Modal';
 import Login from './Pages/Login/Login';
 import Signup from './Pages/Signup/Signup';
+import UserManagement from './Pages/UserManagement/UserManagement';
 
 function App() {
   return (
     <div className="App">
+      {/* Support for Create task, Edit project */}
       <DrawerJira />
       <Loading />
+      {/* Suport for task detail modal */}
       <Modal/>
       <Switch>
-        {/* <Route exact path="/" component={SidebarLeft}/> */}
-        {/* <Route exact path="/">
-          <SidebarLeft/>
-          <MenuMain/>
-          Test
-        </Route> */}
         <Route exact path="/login" component={Login}/>
         <Route exact path="/signup" component={Signup}/>
         <JiraMainTemplate exact path="/" Component={ProjectManagement} />
@@ -30,6 +27,7 @@ function App() {
         <JiraMainTemplate exact path="/createProject" Component={CreateProject} />
         <JiraMainTemplate exact path="/kanboard" Component={Kanboard} />
         <JiraMainTemplate exact path="/projectDetail/:projectId" Component={Kanboard} />
+        <JiraMainTemplate exact path="/userManagement" Component={UserManagement}/>
       </Switch>
 
     </div>

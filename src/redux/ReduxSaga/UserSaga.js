@@ -1,10 +1,9 @@
-// Get user with keyword
-
 import { call, put, takeLatest, delay } from "redux-saga/effects";
 import { userServices } from "../../Services/UserService";
 import { STATUS_CODE, TOKEN, USER_LOGIN } from "../../utils/constain/setting";
 import { history } from "../../utils/history";
-import { GET_LIST_PROJECT, GET_LIST_PROJECT_SAGA, GET_USER, GET_USER_SAGA, HIDE_LOADER, LINK_TO_EFFECT_LOADER_SAGA, LINK_TO_SIGNUP_EFFECT_SAGA, LOGOUT_SAGA, SHOW_LOADER, SIGNIN, SIGNUP, USER_SIGN_IN_SAGA, USER_SIGN_UP_SAGA } from "../contains/contains";
+import { JiraNotification } from "../../utils/JiraNotification/JiraNotification";
+import { CLOSE_FORM_DRAWER, DELETE_USER_SAGA, EDIT_USER_SAGA, GET_LIST_PROJECT_SAGA, GET_USER, GET_USER_SAGA, HIDE_LOADER, LINK_TO_EFFECT_LOADER_SAGA, LOGOUT_SAGA, SHOW_LOADER, SIGNIN, SIGNUP, USER_SIGN_IN_SAGA, USER_SIGN_UP_SAGA } from "../contains/contains";
 
 // Get all user
 function* getUserSaga(action) {
@@ -110,4 +109,49 @@ function* logoutSaga() {
 
 export function* listenLogoutSaga() {
   yield takeLatest(LOGOUT_SAGA, logoutSaga);
+}
+
+// Delete user
+function* deleteUser(action) {
+  yield put({ type: SHOW_LOADER });
+  try {
+    const {data, status} = yield call(()=>userServices.deleteUser(action.userId))
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put({type: GET_USER_SAGA, keyword: action.searchTemp});
+      JiraNotification('success', 'Delete user successfully !');
+    }
+  } catch (error) {
+    console.log(error.response);
+    JiraNotification('error', 'Delete user failed !');
+  }
+  yield delay(500);
+  yield put({ type: HIDE_LOADER });
+}
+
+export function* listenDeleteUser() {
+  yield takeLatest(DELETE_USER_SAGA, deleteUser);
+}
+
+// Edit user
+function* editUser(action) {
+  yield put({ type: SHOW_LOADER });
+  try {
+    const {data, status} = yield call(()=>userServices.editUser(action.userEdit))
+    if (status === STATUS_CODE.SUCCESS) {
+      yield put({type: GET_USER_SAGA, keyword: action.searchTemp})
+      yield put({type: CLOSE_FORM_DRAWER});
+      JiraNotification('success', 'Edit user successfully !');
+
+    }
+  } catch (error) {
+    console.log(error.response);
+    JiraNotification('error', 'Edit user failed !');
+
+  }
+  yield delay(500);
+  yield put({ type: HIDE_LOADER });
+}
+
+export function* listenEditUser() {
+  yield takeLatest(EDIT_USER_SAGA, editUser);
 }

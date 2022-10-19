@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import './CreateProject.scss';
-
-import * as yup from 'yup';
 import { Editor } from '@tinymce/tinymce-react';
 import { connect, useDispatch } from "react-redux";
 import { withFormik } from "formik";

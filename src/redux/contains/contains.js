@@ -13,6 +13,8 @@ export const UPDATE_TASK_SAGA = 'UPDATE_TASK_SAGA';
 
 // User
 export const GET_USER_SAGA = 'GET_USER_SAGA';
+export const DELETE_USER_SAGA = 'DELETE_USER_SAGA';
+export const EDIT_USER_SAGA ='EDIT_USER_SAGA';
 
 // Status
 export const GET_ALL_STATUS_SAGA = 'GET_ALL_STATUS_SAGA';
@@ -62,6 +64,8 @@ export const GET_TASK_LIST = 'GET_TASK_LIST';
 
 // User
 export const GET_USER = 'GET_USER';
+export const EDIT_USER = 'EDIT_USER';
+export const SEARCH_TEMP = 'SEARCH_TEMP';
 
 // Status
 export const GET_ALL_STATUS = 'GET_ALL_STATUS';

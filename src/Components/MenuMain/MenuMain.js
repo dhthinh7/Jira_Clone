@@ -56,6 +56,10 @@ export default function MenuMain() {
       <span className="icon mr-4"><PlusCircleOutlined /></span>
       <span className="text">Create project</span>
     </NavLink>
+    <NavLink to='/userManagement' className="jira-menuItem text-base" activeClassName="menuActived" onClick={handleClick}>
+      <span className="icon mr-4"><i className="fa fa-users-cog"></i></span>
+      <span className="text">User Management</span>
+    </NavLink>
     <br />
     <NavLink to='/' className="jira-menuItem jira-menuItem--unsupported text-base">
       <span className="icon mr-4"><i className="fa fa-truck"></i></span>

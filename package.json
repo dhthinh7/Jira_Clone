@@ -10,6 +10,7 @@
     "antd": "^4.23.4",
     "axios": "^1.1.0",
     "formik": "^2.2.9",
+    "gh-pages": "^4.0.0",
     "history": "^4.10.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
@@ -26,8 +27,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts --max_old_space_size=4096 start",
-    "build": "react-scripts --max_old_space_size=4096 build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

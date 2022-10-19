@@ -308,7 +308,7 @@ export default function Modal(props) {
                     <h6 className="my-3">REPORTER</h6>
                     <div className="item flex align-middle">
                       <div className="avatar">
-                        <img src={userLogin?.avatar} alt='xyz' className="rounded-full mr-3 w-12 items-center" />
+                        <img src={projectDetail.creator?.avatar} alt='missing' className="rounded-full mr-3 w-12 items-center" />
                       </div>
                       <p className="name text-lg m-0">{projectDetail.creator?.name}</p>
                     </div>

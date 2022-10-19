@@ -128,7 +128,7 @@ export default function ProjectManagement() {
                   {text.members?.map((item, index) => {
                     return <tr key={index}>
                       <td>{item.userId}</td>
-                      <td><img src={item.avatar} width="30" height="30" style={{ borderRadius: '15px'}} /></td>
+                      <td><img src={item.avatar} width="30" height="30" style={{ borderRadius: '15px'}} alt="xyz" /></td>
                       <td>{item.name}</td>
                       <td>
                         <button onClick={() => {
@@ -182,14 +182,16 @@ export default function ProjectManagement() {
       title: 'Action',
       dataIndex: '',
       key: 'action',
-      sorter: (a, b) => a.address.length - b.address.length,
+      // sorter: (a, b) => a.address.length - b.address.length,
       ellipsis: true,
       render: (text, record, index) => {
         return <div>
           <button className="btn mr-2 btn-primary" onClick={() => {
             const action = {
               type: OPEN_FORM_DRAWER,
-              title: 'Edit Project',
+              custom: {
+                title: 'Edit Project',
+              },
               Component: <EditProject />,
             }
 
@@ -225,7 +227,7 @@ export default function ProjectManagement() {
 
   ];
 
-  return <div className="ml-72 p-16 w-full">
+  return <div className="">
     <h1 className="font-semibold">Project management</h1>
     <Table className="p-4" tableLayout="fixed" columns={columns} rowKey={"id"} dataSource={projectList} onChange={handleChange} />
   </div>;

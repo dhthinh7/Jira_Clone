@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import './CreateProject.scss';
-
-import * as yup from 'yup';
 import { Editor } from '@tinymce/tinymce-react';
 import { connect, useDispatch } from "react-redux";
 import { withFormik } from "formik";
@@ -37,7 +35,7 @@ function CreateProject(props) {
     }
   }, []);
 
-  return <div className="jr-createPro ml-72 px-16 pt-10 w-full">
+  return <div className="jr-createPro">
     <h1 className="font-semibold">Create Project</h1>
     <form className="jr-createProForm p-4" onSubmit={handleSubmit}>
       <div className="jr-formGroup mb-7">

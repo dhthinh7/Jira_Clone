@@ -4,7 +4,7 @@ import React from 'react'
 import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { EDIT_TASK_SAGA, GET_ALL_PROJECT_CATEGORY_SAGA, SET_SUBMIT_TASK, UPDATE_PROJECT_SAGA } from '../../../redux/contains/contains';
+import { GET_ALL_PROJECT_CATEGORY_SAGA, SET_SUBMIT_TASK, UPDATE_PROJECT_SAGA } from '../../../redux/contains/contains';
 
 
 function EditProject(props) {
@@ -19,7 +19,7 @@ function EditProject(props) {
         setValues,
         setFieldValue
     } = props;
-
+   
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -103,7 +103,7 @@ const EditProjectForm = withFormik({
     handleSubmit: (values, { props, setSubmitting }) => {
         props.dispatch({
             type: UPDATE_PROJECT_SAGA,
-            projectUpdate: values
+            projectUpdate: values,
         })
 
     },

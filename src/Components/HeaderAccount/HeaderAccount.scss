@@ -1,0 +1,145 @@
+.jr-head-account {
+  position: relative;
+
+  .avatar {
+    margin-right: 30px;
+  }
+
+  &::after {
+    border-bottom: 1px solid #0747A6;
+  }
+
+  .focus-only:focus {
+    outline: 2px solid red;
+  }
+
+  .arrow {
+    width: 15px;
+    height: 15px;
+    display: flex;
+
+    &::after {
+      content: '';
+      top: 12px;
+      right: 18px;
+      position: absolute;
+      border-top: 15px solid black;
+      border-right: 15px solid transparent;
+      border-left: 15px solid transparent;
+      transition: all .3s ease-out;
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+  }
+
+  .jr-head-modal {
+    position: absolute;
+    top: 37px;
+    right: 0;
+    min-width: 15rem;
+    background-color: #fff;
+    z-index: 100;
+    box-shadow: 0 0 15px 1px rgb(81 77 92 / 20%);
+    border-radius: 5px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -7px;
+      right: 17px;
+      border-bottom: 10px solid #fff;
+      border-right: 15px solid transparent;
+      border-left: 15px solid transparent;
+      transition: all .3s ease-in-out;
+    }
+  }
+
+  .showModal {
+    animation: moveX_Modal .5s ease-in-out 1;
+    transform: translateX(0);
+    display: block;
+  }
+
+  .hideModal {
+    animation: moveX_Modal_Back .5s ease-in-out 1;
+    display: block;
+    transform: translateX(calc(100% + 5rem));
+    opacity: 1;
+
+  }
+
+  .icon-login {
+    animation: moveX .5s infinite;
+  }
+
+  .btn-header {
+    background-color: rgb(3, 104, 255);
+    width: 70%;
+    margin: 15px auto 15px;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+    color: #fff;
+    display: block;
+    font-size: 1.1rem;
+    transition: all .3s ease-in-out;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background-color: #0747A6 !important;
+    }
+  }
+
+}
+
+@keyframes moveX {
+  0% {
+    transform: translateX(-10px)
+  }
+
+  50% {
+    transform: translateX(0px)
+  }
+
+  100% {
+    transform: translateX(-10px)
+  }
+}
+
+@keyframes moveX_Modal {
+  0% {
+    transform: translateX(calc(100% + 3rem));
+    opacity: 0;
+    display: none;
+  }
+
+  99% {
+    display: none;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+    display: block;
+  }
+}
+
+@keyframes moveX_Modal_Back {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(100% + 3rem));
+    opacity: 0;
+    display: none;
+  }
+}

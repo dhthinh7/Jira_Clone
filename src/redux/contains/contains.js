@@ -13,6 +13,8 @@ export const UPDATE_TASK_SAGA = 'UPDATE_TASK_SAGA';
 
 // User
 export const GET_USER_SAGA = 'GET_USER_SAGA';
+export const DELETE_USER_SAGA = 'DELETE_USER_SAGA';
+export const EDIT_USER_SAGA ='EDIT_USER_SAGA';
 
 // Status
 export const GET_ALL_STATUS_SAGA = 'GET_ALL_STATUS_SAGA';
@@ -41,8 +43,13 @@ export const DELETE_COMMENT_SAGA = 'DELETE_COMMENT_SAGA';
 export const USER_SIGN_IN_SAGA = 'USER_SIGN_IN_SAGA';
 
 // Signup
-export const LINK_TO_SIGNUP_EFFECT_SAGA = 'LINK_TO_SIGNUP_EFFECT_SAGA';
+export const LINK_TO_EFFECT_LOADER_SAGA = 'LINK_TO_EFFECT_LOADER_SAGA';
 export const USER_SIGN_UP_SAGA = 'USER_SIGN_UP_SAGA';
+export const SIGNIN = 'SIGNIN';
+export const SIGNUP = 'SIGNUP';
+
+// Logout
+export const LOGOUT_SAGA = 'LOGOUT_SAGA';
 
 /************************* Action redux ***************************************/
 // Project
@@ -57,6 +64,8 @@ export const GET_TASK_LIST = 'GET_TASK_LIST';
 
 // User
 export const GET_USER = 'GET_USER';
+export const EDIT_USER = 'EDIT_USER';
+export const SEARCH_TEMP = 'SEARCH_TEMP';
 
 // Status
 export const GET_ALL_STATUS = 'GET_ALL_STATUS';
@@ -85,7 +94,7 @@ export const GET_PROJECT_DETAIL_SHOW_LOADING_ONE_TIME = 'GET_PROJECT_DETAIL_SHOW
 // Modal
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
-export const UPDATE_DESCRIPTION= 'UPDATE_DESCRIPTION';
+export const UPDATE_DESCRIPTION = 'UPDATE_DESCRIPTION';
 export const CHANGE_TASK_MODAL = 'CHANGE_TASK_MODAL';
 export const REMOVE_USER_ASSIGN = 'REMOVE_USER_ASSIGN';
 export const CHANGE_ASSIGNES = 'CHANGE_ASSIGNES';

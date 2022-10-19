@@ -17,7 +17,7 @@ export default function Kanboard(props) {
     })
   }, []);
   
-  return <div className="ml-72 px-16 pt-10 w-full">
+  return <div className="">
     <HeaderDetail projectName={projectDetail.projectName} />
     <KanboardInfor projectDetail={projectDetail} />
     <KanBoardContent projectDetail={projectDetail} />

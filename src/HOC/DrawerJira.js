@@ -1,10 +1,10 @@
 import { Button, Drawer } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CLOSE_FORM_DRAWER } from '../redux/contains/contains';
 
 export default function DrawerJira() {
-  const {isOpen, title, Component, callBackSubmit} = useSelector(state=>state.DrawerReducer);
+  const {isOpen, custom, Component, callBackSubmit} = useSelector(state=>state.DrawerReducer);
   const dispatch = useDispatch();
   
   const onClose = () => {
@@ -23,16 +23,14 @@ export default function DrawerJira() {
   return (
     <>
       <Drawer
-        title={title}
-        placement="right"
+        title={custom.title}
+        placement={custom.placement}
         onClose={onClose}
         open={isOpen}
-        height='100%'
-        width="720px"
+        height={custom.height}
+        width={custom.width}
         footer={renderFooterDrawer()}
       >
-        {/* <CreateTask/> */}
-        {/* <EditProject/> */}
         {Component}
       </Drawer>
     </>

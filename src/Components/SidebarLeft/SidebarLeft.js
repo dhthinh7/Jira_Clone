@@ -29,7 +29,9 @@ export default function SidebarLeft() {
             <span className="mb-2" onClick={() => {
               dispatch({
                 type: OPEN_FORM_DRAWER,
-                title: 'Create Task',
+                custom: {
+                  title: 'Create Task',
+                },
                 Component: <CreateTask />,
               })
               

@@ -1,5 +1,5 @@
 # My note in this Jira clone project 
-
+[Visit project online](https://deploy-jira-clone.herokuapp.com)
 ## What I used:
 
 ### Router

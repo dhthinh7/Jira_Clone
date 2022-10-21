@@ -28,7 +28,7 @@ function CreateProject(props) {
       })
     } else {
       dispatch({type: SHOW_LOADER});
-      history.push('login');
+      history.push('/login');
       setTimeout(() => {
         dispatch({type: HIDE_LOADER});
       }, 300);

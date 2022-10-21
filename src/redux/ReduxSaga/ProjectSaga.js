@@ -58,7 +58,7 @@ function* getProjectDetailLoadingSaga(action) {
   if (localStorage.getItem(USER_LOGIN)) {
     yield put({ type: GET_PROJECT_DETAIL_SAGA, projectId });
   } else {
-    history.push('/login');
+    history.push('login');
   }
   yield delay(300);
   yield put({ type: HIDE_LOADER });

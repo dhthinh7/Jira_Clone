@@ -1,5 +1,4 @@
-// import { Switch, Route } from 'react-router-dom';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import DrawerJira from './HOC/DrawerJira';
 import CreateProject from './Pages/CreateProject/CreateProject';
@@ -19,17 +18,18 @@ function App() {
       <DrawerJira />
       <Loading />
       {/* Suport for task detail modal */}
-      <Modal />
-        <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
-          <JiraMainTemplate exact path="/" Component={ProjectManagement} />
-          <JiraMainTemplate exact path="/projectManagement" Component={ProjectManagement} />
-          <JiraMainTemplate exact path="/createProject" Component={CreateProject} />
-          <JiraMainTemplate exact path="/kanboard" Component={Kanboard} />
-          <JiraMainTemplate exact path="/projectDetail/:projectId" Component={Kanboard} />
-          <JiraMainTemplate exact path="/userManagement" Component={UserManagement} />
-        </Switch>
+      <Modal/>
+      <Switch>
+        <Route exact path="/login" component={Login}/>
+        <Route exact path="/signup" component={Signup}/>
+        <JiraMainTemplate exact path="/" Component={ProjectManagement} />
+        <JiraMainTemplate exact path="/projectManagement" Component={ProjectManagement} />
+        <JiraMainTemplate exact path="/createProject" Component={CreateProject} />
+        <JiraMainTemplate exact path="/kanboard" Component={Kanboard} />
+        <JiraMainTemplate exact path="/projectDetail/:projectId" Component={Kanboard} />
+        <JiraMainTemplate exact path="/userManagement" Component={UserManagement}/>
+      </Switch>
+
     </div>
   )
 }

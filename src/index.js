@@ -3,19 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { history } from './utils/history';
 import 'antd/dist/antd.css'
 import { Provider } from 'react-redux';
 import store from './redux/rootReducer';
-// import { Router } from 'react-router-dom';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
-
+import { Router } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Router history={history} basename="Jira-clone">
+    <Router history={history}>
         <Provider store={store}>
             <App />
         </Provider>

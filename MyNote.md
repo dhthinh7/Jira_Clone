@@ -1,5 +1,5 @@
 # My note in this Jira clone project 
-[Visit project online](https://myjira.netlify.app/)
+[Visit project online](https://git-jira-clone.netlify.app/)
 ## What I used:
 
 ### Router

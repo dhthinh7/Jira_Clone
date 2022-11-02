@@ -14,7 +14,7 @@ export const history = createBrowserHistory();
 4. npm i styled-components
 5. npm i sass -g
 6. npm install -D tailwindcss postcss autoprefixer
-  npx tailwindcss init -p to create tailwind.config.js and postcss.config.js
+  npx tailwindcss init -p : to create tailwind.config.js and postcss.config.js
 ### Form
 7. npm install @tinymce/tinymce-react => support text editing key=o70v2ykzygkcocst9ihtgti5i5fi030v2owgrb4hsg7gvhcf
 8. npm install formik => useFormik

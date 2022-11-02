@@ -43,7 +43,7 @@ export default function UserManagement() {
 
   const handleChange = (e) => {
     // Debounce search
-    if (!refSearch) {
+    if (refSearch.current) {
       clearTimeout(refSearch.current);
     }
     refSearch.current = setTimeout(() => {

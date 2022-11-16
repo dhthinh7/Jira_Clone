@@ -6,6 +6,7 @@ import { ADD_USER_PROJECT_SAGA, DELETE_PROJECT_SAGA, EDIT_PROJECT, GET_LIST_PROJ
 import { FormOutlined, DeleteOutlined } from '@ant-design/icons'
 import EditProject from "../../Components/Form/EditProject/EditProject";
 import { NavLink } from "react-router-dom";
+import './ProjectManagement.scss';
 
 export default function ProjectManagement() {
 
@@ -54,7 +55,7 @@ export default function ProjectManagement() {
       sorter: (a, b) => b.id - a.id,
       defaultSortOrder: 'ascend',
       ellipsis: true,
-      width: '10%'
+      // width: '10%'
     },
     {
       title: 'Project Name',
@@ -69,7 +70,7 @@ export default function ProjectManagement() {
         return 1;
       },
       ellipsis: true,
-      width: '20%',
+      // width: '20%',
       render: (text, record, index) => {
         return <NavLink to={`/projectDetail/${record.id}`}>{text}</NavLink>
       }
@@ -114,7 +115,7 @@ export default function ProjectManagement() {
       render: (text, record, index) => {
         return <div>
           {text.members?.slice(0, 3).map((member, index) => {
-            return <Popover key={index} content={() => {
+            return <Popover className="project-popover" key={index} content={() => {
               return <table className="table">
                 <thead>
                   <tr>
@@ -127,7 +128,7 @@ export default function ProjectManagement() {
                 <tbody>
                   {text.members?.map((item, index) => {
                     return <tr key={index}>
-                      <td>{item.userId}</td>
+                      <td className="project-members">{item.userId}</td>
                       <td><img src={item.avatar} width="30" height="30" style={{ borderRadius: '15px'}} alt="xyz" /></td>
                       <td>{item.name}</td>
                       <td>
@@ -147,10 +148,10 @@ export default function ProjectManagement() {
                 </tbody>
               </table>
             }}>
-              <Avatar key={index} src={member.avatar} />
+              <Avatar className="project-memberAvatar" key={index} src={member.avatar} />
             </Popover>
           })}
-          {text.members?.length > 3 ? <Avatar>...</Avatar> : ''}
+          {text.members?.length > 3 ? <Avatar className="project-memberAvatarHide">...</Avatar> : ''}
           <Popover placement="rightTop" title={"Add user"} content={() => {
             return <AutoComplete
               options={options}
@@ -173,7 +174,7 @@ export default function ProjectManagement() {
               onChange={onChange}
               placeholder="input here" />
           }} trigger="click">
-            <Button style={{ borderRadius: '50%' }}>+</Button>
+            <Button className="project-addBtn" style={{ borderRadius: '50%', width: '32px', height: '32px' }}>+</Button>
           </Popover>
         </div>
       }
@@ -186,7 +187,7 @@ export default function ProjectManagement() {
       ellipsis: true,
       render: (text, record, index) => {
         return <div>
-          <button className="btn mr-2 btn-primary" onClick={() => {
+          <button className="project-action btn mr-2 btn-primary" onClick={() => {
             const action = {
               type: OPEN_FORM_DRAWER,
               custom: {
@@ -216,7 +217,7 @@ export default function ProjectManagement() {
             okText="Yes"
             cancelText="No"
           >
-            <button className="btn btn-danger">
+            <button className="project-action btn btn-danger">
               <DeleteOutlined style={{ fontSize: 17 }} />
             </button>
           </Popconfirm>
@@ -227,9 +228,9 @@ export default function ProjectManagement() {
 
   ];
 
-  return <div className="">
+  return <div className="project-management">
     <h1 className="font-semibold">Project management</h1>
-    <Table className="p-4" tableLayout="fixed" columns={columns} rowKey={"id"} dataSource={projectList} onChange={handleChange} />
+    <Table className="project-table" tableLayout="fixed" columns={columns} rowKey={"id"} dataSource={projectList} onChange={handleChange} />
   </div>;
 
 }

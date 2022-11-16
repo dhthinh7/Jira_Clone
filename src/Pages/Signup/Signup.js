@@ -6,19 +6,17 @@ import * as Yup from 'yup';
 import { connect } from 'react-redux';
 import {  USER_SIGN_UP_SAGA } from '../../redux/contains/contains';
 import { NavLink } from 'react-router-dom';
+import "./Signup.scss";
 function LoginPage(props) {
   const {
-    values,
-    touched,
     errors,
     handleChange,
-    handleBlur,
     handleSubmit,
   } = props;
 
   return (
     <form onSubmit={(e)=>{e.preventDefault(); handleSubmit()}} className="container" style={{ height: window.innerHeight }} >
-      <div className="d-flex flex-column justify-content-center align-items-center w-1/4 mx-auto" style={{ height: '100%' }} >
+      <div className="signup d-flex flex-column justify-content-center align-items-center w-1/4 mx-auto" style={{ height: '100%' }} >
         <h3 className="text-center" style={{ fontWeight: 300, fontSize: 35 }}>Create Account</h3>
         <div className="d-flex mt-3 w-full" >
           <Input onChange={handleChange} style={{ width: '100%', minWidth: 300 }} name="email" size="large" placeholder="Email" prefix={<MailOutlined />} />
@@ -37,7 +35,7 @@ function LoginPage(props) {
         </div>
         <div className="text-danger">{errors.passWord}</div>
         <div className="flex justify-between w-full">
-          <Button htmlType="submit" size="large" style={{ minWidth: '100%', backgroundColor: 'rgb(102,117,223)', color: '#fff' }} className="mt-5 border-0">Signup</Button>
+          <Button htmlType="submit" size="large" style={{ minWidth: '100%', backgroundColor: 'rgb(102,117,223)', color: '#fff' }} className="signup-btn mt-5 border-0">Signup</Button>
         </div>
         <NavLink to="/login">Back to login <i className="fa fa-long-arrow-alt-left mt-3"></i></NavLink>
       </div>

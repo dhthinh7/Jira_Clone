@@ -17,7 +17,7 @@ export default function HeaderAccount() {
   const handleMouse = (event) => {
     if (ref.current?.contains(event.target)) {
       setIsShow(true);
-    } else if (!event.target.className.includes('arrow')) {
+    } else if (!event.target.classList?.contains('arrow')) {
       setIsShow(false);
     }
   }
@@ -42,7 +42,7 @@ export default function HeaderAccount() {
     return <div className="jr-head-account flex justify-end items-center">
       <h3 className="font-semibold text-base m-0 mr-2">Chào!, <span>{userLogin.name}</span></h3>
       <div className="avatar">
-        <img src={userLogin.avatar} alt="" className="w-10 rounded-full" />
+        <img src={userLogin.avatar} alt="" className="header-img w-10 rounded-full" />
       </div>
       <button className="arrow ml-2" onClick={() => {setIsShow(!isShow)}}></button>
       {renderModal()}

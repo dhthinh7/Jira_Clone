@@ -26,7 +26,7 @@ export default function HeaderAccount() {
     // Add event mousedown to close modal when click  outside modal
     window.addEventListener("mousedown", handleMouse);
     return () => {
-      window.removeEventListener("mousedown", handleMouse);
+      window.removeEventListener("mousedown", window.addEventListener("mousedown", handleMouse))
     }
   }, [])
 

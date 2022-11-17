@@ -165,8 +165,9 @@
   .jr-head-account {
     position: fixed;
     right: 1rem;
-    h3 {
+    h3, i, span {
       font-size: .8rem;
+      color: white;
     }
     .avatar {
       margin-right: 15px;

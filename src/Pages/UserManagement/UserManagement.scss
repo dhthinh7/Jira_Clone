@@ -1,14 +1,20 @@
 .jr-user-management {
-  .ant-table-thead > tr > th, .th.ant-table-column-sort {
+
+  .ant-table-thead>tr>th,
+  .th.ant-table-column-sort {
     background-color: rgba(100, 116, 139, 0.3);
   }
+
   .jr-user-table {
     .user-row-table {
-      &:hover .ant-table-cell, .ant-table-column-sort {
+
+      &:hover .ant-table-cell,
+      .ant-table-column-sort {
         background-color: rgba(100, 116, 139, 0.2);
       }
     }
   }
+
   .ant-table-thead th.ant-table-column-has-sorters:hover {
     background-color: rgba(100, 116, 139, 0.2);
   }
@@ -16,21 +22,178 @@
   // Disable user who created project
   .user-created-project {
     transition: all .5s;
+    position: relative;
+
     &:hover {
       cursor: not-allowed;
     }
+
     &:hover::after {
-      content: 'User is joined in project';
+      content: 'Can not delete';
       position: absolute;
-      background-color: #0747A6;
-      width: 150px;
-      top: -15px;
-      right: 0;
+      background-color: black;
+      width: 7rem;
+      top: -.3rem;
+      right: 0rem;
       padding: 5px;
       font-size: 0.8rem;
       border-top-left-radius: 10px;
       border-bottom-right-radius: 10px;
-      color: #fff;
+      color: white;
+    }
+  }
+}
+
+// Media device
+@media screen and (max-width: 1200px) {
+  .jr-user-management {
+
+    .ant-table-thead>tr>th,
+    .ant-table-tbody>tr>td {
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    .ant-table-thead>tr>th {
+      &:nth-child(1) {
+        width: 10%;
+      }
+    }
+
+    .ant-table-tbody>tr>td {
+      &:nth-child(5) {
+        .ant-table-cell-ellipsis {
+          overflow: unset !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .jr-user-management {
+
+    .ant-table-thead>tr>th,
+    .ant-table-tbody>tr>td {
+      padding: 10px;
+      font-size: .9rem;
+    }
+
+    .ant-table-thead>tr>th {
+      &:nth-child(1) {
+        width: 10%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .jr-user-management {
+    margin-top: 3rem;
+
+    .ant-table-thead>tr>th,
+    .ant-table-tbody>tr>td {
+      padding: 10px;
+      font-size: .9rem;
+    }
+
+    .ant-table-thead>tr>th {
+      &:nth-child(1) {
+        width: 10%;
+      }
+
+      &:nth-child(2) {
+        width: 25%;
+      }
+
+      &:nth-child(3) {
+        width: 20%;
+      }
+
+      &:nth-child(4) {
+        width: 18%;
+      }
+    }
+
+    // Disable user who created project
+    .user-created-project {
+      transition: all .5s;
+      position: relative;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+
+      &:hover::after {
+        display: none;
+
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .jr-user-management {
+    .input-search {
+      margin: .5rem 0 !important;
+
+      input {
+        padding: 0.3rem 0.5rem;
+        font-size: .8rem;
+        margin-right: .5rem !important;
+      }
+
+      button {
+        font-size: .8rem;
+        height: calc(1.5em + 0.75rem + 2px);
+        ;
+      }
+    }
+    .ant-table-content {
+      table {
+        table-layout: unset !important;
+      }
+    }
+    .ant-table-thead>tr>th,
+    .ant-table-tbody>tr>td {
+      padding: 5px;
+      font-size: .9rem;
+    }
+
+    .ant-table-thead>tr>th {
+      &:nth-child(1) {
+        width: 15%;
+      }
+
+      &:nth-child(2) {
+        width: 25%;
+        display: none;
+      }
+
+      &:nth-child(3) {
+        // width: 35%;
+      }
+
+      &:nth-child(4) {
+        width: 35%;
+      }
+    }
+
+    .ant-table-tbody>tr>td {
+      &:nth-child(2) {
+        display: none;
+      }
+
+      &:nth-child(5) {
+        div {
+          .manageUser-btn {
+            margin-right: 0.1rem !important;
+            padding: 0.3rem 0.5rem;
+            line-height: 1;
+            font-size: .8rem;
+          }
+        }
+      }
     }
   }
 }

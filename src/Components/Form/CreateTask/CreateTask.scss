@@ -1,0 +1,15 @@
+// Media screen
+@media screen and (max-width: 576px) {
+  .form-group {
+    .form-priority {
+      // grid-template-columns: 1fr;
+      gap: .5rem !important;
+    }
+    .form-bot {
+      &>div {
+        flex: 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}

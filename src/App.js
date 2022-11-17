@@ -17,7 +17,7 @@ function App() {
       {/* Support for Create task, Edit project */}
       <DrawerJira />
       <Loading />
-      {/* Suport for task detail modal */}
+      {/* Support for task detail modal */}
       <Modal/>
       <Switch>
         <Route exact path="/login" component={Login}/>

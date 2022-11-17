@@ -12,6 +12,8 @@ export default function UserManagement() {
 
   const dispatch = useDispatch();
   const refSearch = useRef(null);
+  let [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  let [contentDelButton, setContentDelButton] = useState('Delete');
 
   // Create temp userSearch to hold value in search input
   const { userSearch, searchTemp } = useSelector(state => state.UserReducer);
@@ -37,6 +39,14 @@ export default function UserManagement() {
     dispatch({ type: GET_LIST_PROJECT_SAGA });
   }, [])
 
+  useEffect(() => {
+    let handleResize = window.addEventListener('resize', () => {
+      setScreenWidth(window.innerWidth);
+      window.innerWidth > 577 ? setContentDelButton('Delete') : setContentDelButton('Del');
+    });
+    return () => window.removeEventListener('resize', handleResize);
+  }, [])
+  
   const onChange = (pagination, filters, sorter, extra) => {
     console.log('params', pagination, filters, sorter, extra);
   };
@@ -57,22 +67,25 @@ export default function UserManagement() {
     {
       title: 'STT',
       dataIndex: 'stt',
-      width: '10px',
+      width: '10%',
       key: 'stt',
       sorter: (item1, item2) => {
         return item1.stt > item2.stt
       },
+      ellipsis: true
     },
     {
       title: 'Email',
       dataIndex: 'email',
-      width: '30%',
-      key: 'email'
+      // width: '25%',
+      key: 'email',
+      ellipsis: true
     },
     {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
+      ellipsis: true,
       sorter: (item1, item2) => {
         return item1.name?.trim().toLowerCase() > item2.name?.trim().toLowerCase() ? 1 : -1
       },
@@ -91,14 +104,16 @@ export default function UserManagement() {
       title: 'Phone',
       dataIndex: 'phoneNumber',
       key: 'phoneNumber',
+      ellipsis: true
     },
     {
       title: 'Action',
       key: 'action',
-      width: '20%',
+      // width: '20%',
+      ellipsis: true,
       render: (text, record, index) => {
         return <div>
-          <button className="btn mr-2 btn-primary" onClick={() => {
+          <button className="manageUser-btn btn mr-2 btn-primary" onClick={() => {
             // Open drawer with edit user form
             dispatch({
               type: OPEN_FORM_DRAWER,
@@ -118,7 +133,7 @@ export default function UserManagement() {
           }}>
             Edit
           </button>
-          {listMembersJoinedProject.find((item, index) => record.userId === item) ? <button className="btn btn-danger user-created-project disabled">Delete</button> :
+          {listMembersJoinedProject.find((item, index) => record.userId === item) ? <button className="manageUser-btn btn btn-danger user-created-project disabled">{contentDelButton}</button> :
             <Popconfirm
               title="Are you sure to delete this user?"
               onConfirm={() => {
@@ -127,7 +142,8 @@ export default function UserManagement() {
               okText="Yes"
               cancelText="No"
             >
-              <button className="btn btn-danger">Delete</button>
+              {screenWidth > 577 ? <button className="manageUser-btn btn btn-danger">Delete</button> : <button className="manageUser-btn btn btn-danger">Del</button>}
+              
             </Popconfirm>
           }
         </div>

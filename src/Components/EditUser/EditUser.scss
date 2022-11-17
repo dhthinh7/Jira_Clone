@@ -1,0 +1,27 @@
+
+
+@media screen and (max-width: 1200px) {
+  .container {
+    .userEdit-content {
+      width: 100% !important;
+      .userEdit-item {
+        & > span {
+          width: 100%;
+          min-width: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+
+}
+
+@media screen and (max-width: 768px) {
+  
+}
+
+@media screen and (max-width: 576px) {
+
+}

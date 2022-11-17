@@ -4,6 +4,7 @@ import { withFormik } from "formik";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
+import './CreateTask.scss';
 import { CREATE_TASK_SAGA, GET_ALL_STATUS_SAGA, GET_LIST_PROJECT_SAGA, GET_PRIORITY_SAGA, GET_PROJECT_DETAIL_SAGA, GET_TYPE_SAGA, SET_SUBMIT_TASK } from "../../../redux/contains/contains";
 
 function CreateTask(props) {
@@ -57,7 +58,7 @@ function CreateTask(props) {
       </select>
     </div>
     <div className="form-group">
-      <div className="grid grid-cols-2 gap-5 ">
+      <div className="form-priority grid grid-cols-2 gap-5 ">
         <div>
           <p>Priority</p>
           <select name="priorityId" className="form-control" onChange={handleChange}>
@@ -73,11 +74,9 @@ function CreateTask(props) {
           </select>
         </div>
       </div>
-
     </div>
-
     <div className="form-group">
-      <div className="row">
+      <div className="form-bot row">
         <div className="col-6">
           <p>Assignees</p>
           <Select
@@ -153,8 +152,7 @@ function CreateTask(props) {
         />
       </div>
     </div>
-    {/* <button type="submit">submit</button> */}
-  </form>;
+  </form>
   </>
 }
 

@@ -34,11 +34,12 @@ export default function MenuMain() {
 
   useEffect(() => {
     window.addEventListener('resize', getScreenWidth);
-    return () => window.removeEventListener('resize', getScreenWidth);
+    return () => window.removeEventListener('resize', window.addEventListener('resize', getScreenWidth));
   }, [screenWidth]);
 
   const handleClick = (e) => {
-    handleActived(e);
+    // handleActived(e);
+    setIsShow(false)
   }
 
   const handleActived = (e) => {
@@ -75,6 +76,7 @@ export default function MenuMain() {
         </div>
       </div>
       <div className={`${screenWidth < 768.9 ? "jira-menuItemSmall " : "jira-menuItem isDisplay"} text-base active`} onClick={() => {
+        setIsShow(false);
         dispatch({
           type: OPEN_FORM_DRAWER,
           custom: {

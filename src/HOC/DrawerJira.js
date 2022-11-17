@@ -2,6 +2,7 @@ import { Button, Drawer } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CLOSE_FORM_DRAWER } from '../redux/contains/contains';
+import './DrawerJira.scss';
 
 export default function DrawerJira() {
   const {isOpen, custom, Component, callBackSubmit} = useSelector(state=>state.DrawerReducer);
@@ -30,6 +31,7 @@ export default function DrawerJira() {
         height={custom.height}
         width={custom.width}
         footer={renderFooterDrawer()}
+        className="jira-drawer"
       >
         {Component}
       </Drawer>

@@ -1,3 +1,32 @@
 .jira {
   height: 100% !important;
 }
+
+// Media device
+@media screen and (max-width: 1200px) {
+  .jira {
+    .jira-main-child {
+      padding: 1rem .8rem !important;
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .jira {
+    .jira-main-child {
+      margin-left: 95px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .jira {
+    .jira-main-child {
+      margin-left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+
+}

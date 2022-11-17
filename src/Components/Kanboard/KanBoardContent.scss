@@ -1,4 +1,9 @@
 .jr-board-content {
+  .card {
+    .card-header {
+      padding: .75rem .9rem;
+    }
+  }
   .list-group-item {
     margin: 15px 10px 0 10px ;
     border-radius: 10px ;
@@ -25,3 +30,50 @@
     margin-bottom: 15px;
   }
 }
+
+// Media device
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {
+  .jr-board-content {
+    .list-group {
+      .list-group-item {
+        padding: 10px;
+        height: fit-content;
+  
+        .block {
+          display: block !important;
+          .block-right {
+            margin-top: .5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .jr-board-content {
+    .card {
+      .card-header {
+        padding: .75rem .9rem;
+      }
+    }
+
+    .list-group {
+      .list-group-item {
+        padding: 10px;
+        height: fit-content;
+  
+        .block {
+          display: block !important;
+          .block-right {
+            margin-top: .5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {}

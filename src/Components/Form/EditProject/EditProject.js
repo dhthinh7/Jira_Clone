@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { GET_ALL_PROJECT_CATEGORY_SAGA, SET_SUBMIT_TASK, UPDATE_PROJECT_SAGA } from '../../../redux/contains/contains';
-
+import './EditProject.scss';
 
 function EditProject(props) {
 
@@ -29,7 +29,7 @@ function EditProject(props) {
 
 
     return (
-        <form className="container-fuild" onSubmit={handleSubmit}>
+        <form className="edit-project container" onSubmit={handleSubmit}>
             <div className="row">
                 <div className="col-4">
                     <div className="form-group">

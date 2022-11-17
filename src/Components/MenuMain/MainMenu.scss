@@ -4,17 +4,34 @@
   height: 100vh;
   padding-top: 10px;
   background-color: rgb(244, 245, 247);
-  .jira-menuItem {
+
+  &.overlap::before {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(221, 221, 221, 0.7);
+  }
+
+  .jira_menuSmallScreen {
+    display: none;
+  }
+
+  .jira-menuItem,
+  .jira-menuItemSmall {
     display: flex;
     align-items: center;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0.5rem;
+    margin-bottom: .5rem;
     line-height: 1.5rem;
     color: rgb(17 24 39);
     transition: all .15s ease-in-out;
+
     .jr-menuLink {
       display: flex;
       align-items: center;
     }
+
     .icon span {
       font-size: 1rem;
       line-height: 1rem;
@@ -25,14 +42,48 @@
       font-size: 1rem;
     }
 
+    .text-smallScreen {
+      display: none;
+    }
+
+  }
+
+  .isDisplay {
+    display: none !important;
+  }
+
+  .jira-menuItem {
     &:hover {
-      background-color: rgb(235, 236, 240);
+      background-color: white;
       border-radius: 0.2rem;
       cursor: pointer;
       text-decoration: none;
       color: rgb(0, 82, 204);
-    }
+      position: relative;
 
+      &::before {
+        content: '';
+        width: 30px;
+        height: 30px;
+        // background: red;
+        position: absolute;
+        top: -30px;
+        right: 0;
+        border-radius: 50%;
+        box-shadow: 10px 10px 10px white;
+      }
+
+      &::after {
+        content: '';
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        bottom: -30px;
+        right: 0;
+        border-radius: 50%;
+        box-shadow: 10px -10px 10px white;
+      }
+    }
   }
 
   .jira-menuAvatar {
@@ -50,22 +101,259 @@
     transition: all .15s ease-in-out;
     cursor: not-allowed;
     color: red;
+
     .text--unsupported {
       display: none;
     }
+
     .text--replace {
       display: inline;
       color: red;
     }
   }
+
   .text--replace {
     display: none;
   }
 
 }
 
-.menuActived {
+.menuActived.jira-menuItem {
   color: rgb(0, 82, 204) !important;
-  background-color: rgb(235, 236, 240);
+  background-color: white;
   border-radius: 0.2rem;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -30px;
+    right: 0;
+    border-radius: 50%;
+    box-shadow: 10px 10px 10px white;
+  }
+
+  &::after {
+    content: '';
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+    border-radius: 50%;
+    box-shadow: 10px -10px 10px white;
+  }
+}
+
+// Media device
+@media screen and (max-width: 1200px) {}
+
+@media screen and (max-width: 992px) {
+  .jira-menu {
+    width: 55px;
+    padding-left: .5rem !important;
+    margin-left: 40px;
+
+    .jira-menuAvatar {
+      div:nth-child(1) {
+        margin: 0 !important;
+        width: 2rem;
+        height: 2rem;
+      }
+
+      div:nth-child(2) {
+        display: none;
+      }
+    }
+
+    .jira-menuItem {
+      width: 100%;
+
+      .icon {
+        margin: 0;
+      }
+
+      .text {
+        display: none;
+      }
+
+      .text-smallScreen {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .jira-menu {
+    background-color: #0747A6;
+    margin: 0 !important;
+    z-index: 100;
+    padding: 0 !important;
+    width: 100%;
+    height: 3.3rem;
+    overflow: unset;
+
+    .jira_menuSmallScreen {
+      display: block;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+
+    .jira-menuFull {
+      position: relative;
+
+      &::before {
+        content: '';
+        width: 13rem;
+        height: 13rem;
+        position: absolute;
+        border: .7rem solid #0747A6;
+        top: 8vh;
+        left: 50%;
+        transform: translate(-50%, 0);
+        border-radius: 50%;
+        background: #DDDD;
+        box-shadow: 0 0 50px grey;
+      }
+      .jira-menuAvatar {
+        display: none;
+      }
+
+      .jira-menuItemSmall {
+        position: absolute;
+        width: 3rem;
+        height: 3rem;
+        top: 10vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        border-radius: 50%;
+        align-items: center;
+        padding: 0.5rem 0.5rem;
+        margin: 0 !important;
+        line-height: 1.5rem;
+        color: rgb(17 24 39);
+        transition: all .15s ease-in-out;
+        cursor: default;
+        margin: 0 !important;
+        transform-origin: 50% 5.8rem;
+        z-index: 100;
+        position: absolute;
+        cursor: pointer;
+        left: 50%;
+
+        .text {
+          display: none;
+        }
+
+        .icon {
+          margin: 0 !important;
+          position: relative;
+          span {
+            margin: 0 !important;
+            padding: 0 !important;
+            svg {
+              font-size: 2rem;
+            }
+          }
+        }
+
+        .text-smallScreen {
+          display: none;
+          width: 7rem;
+        }
+
+        &:hover {
+          cursor: pointer;
+          .text-smallScreen {
+            display: block;
+            position: absolute;
+            text-align: center;
+          }
+        }
+
+        &:nth-child(2) {
+          top: calc(10vh + 4.4rem);
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 0 !important;
+          svg {
+            font-size: 2rem;
+          }
+        }
+
+        @for $i from 3 to 7 {
+          &:nth-child(#{$i}) {
+            transform: translate(-50%, 0) rotate((($i - 2)*90deg));
+
+            .text-smallScreen {
+              transform: translate(-50%, 0) rotate(-($i - 2)*90deg);
+            }
+
+          }
+        }
+      }
+
+      .jira-menuItem.jira-menuItem--unsupported {
+        display: none;
+      }
+    }
+
+    .jira-showControl {
+      animation: showControl .5s ease;
+    }
+
+    .jira-hideControl {
+      left: -100%;
+      animation: hideControl .5s ease-in-out;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {}
+
+@keyframes showControl {
+  0% {
+    opacity: 0;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, 0) scale(0) rotate(90deg);
+  }
+
+  100% {
+    opacity: 1;
+    // top: 6vh;
+    left: 50%;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+@keyframes hideControl {
+  0% {
+    opacity: 1;
+    left: 50%;
+    top: 8vh;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-50%, 0%) scale(0) rotate(-180deg);
+  }
+
+  100% {
+    opacity: 0;
+    left: -50%;
+    // top: -50%;
+    transform: translate(-50%, 0) scale(0);
+  }
 }

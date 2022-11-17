@@ -7,6 +7,7 @@ import ReactHtmlParser from "react-html-parser";
 import { Editor } from "@tinymce/tinymce-react";
 import { Select } from "antd";
 import { USER_LOGIN } from "../../utils/constain/setting";
+import './Modal.scss';
 
 export default function Modal(props) {
   const dispatch = useDispatch();
@@ -133,7 +134,7 @@ export default function Modal(props) {
   }
 
   return (
-    <div className="modal fade show" id="infoModal" tabIndex={-1} role="dialog" aria-labelledby="infoModal" aria-hidden="true">
+    <div className="project-detailModal modal fade show" id="infoModal" tabIndex={-1} role="dialog" aria-labelledby="infoModal" aria-hidden="true">
       <div className="modal-dialog modal-info max-w-5xl">
         <div className="modal-content">
           <div className="modal-header">
@@ -163,15 +164,15 @@ export default function Modal(props) {
           </div>
           <div className="modal-body">
             <div className="container-fluid">
-              <div className="row">
-                <div className="col-8">
+              <div className="project-row row">
+                <div className="row-right col-8">
                   <p className="issue">This is an issue of type: Task.</p>
                   <div className="description">
-                    <h6>Description</h6>
+                    <h6>DESCRIPTION</h6>
                     {renderDescription()}
                   </div>
                   <div className="comment">
-                    <h6 className="my-3">Comment</h6>
+                    <h6 className="my-3">COMMENT</h6>
                     <div className="block-comment" style={{ display: 'flex' }}>
                       <div className="avatar mr-3">
                         <img src={userLogin?.avatar} className="rounded-full" alt='xyz' />
@@ -244,7 +245,7 @@ export default function Modal(props) {
                     </div>
                   </div>
                 </div>
-                <div className="col-4">
+                <div className="row-left col-4">
                   <div className="status">
                     <h6 className="mb-3">STATUS</h6>
                     <select name="statusId" className="custom-select" value={taskDetailModal.statusId} onChange={(e) => { handleChange(e) }}>

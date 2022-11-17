@@ -1,0 +1,27 @@
+// Media screen
+@media screen and (max-width: 1200px) {
+  .jira-drawer {
+    .ant-drawer-content-wrapper {
+      width: 60% !important;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .jira-drawer {
+    .ant-drawer-content-wrapper {
+      width: 80% !important;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .jira-drawer {
+    .ant-drawer-content-wrapper {
+      width: 100% !important;
+      .ant-drawer-body {
+        padding: 1rem;
+      }
+    }
+  }
+}

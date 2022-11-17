@@ -1,0 +1,30 @@
+@media screen and (max-width: 1200px) {
+  .signup {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .signup {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .signup {
+    width: 60%;
+    .signup-btn {
+      padding: .4rem .5rem;
+      margin-top: 2rem !important;
+      span {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .signup {
+    width: 80%;
+  }
+}

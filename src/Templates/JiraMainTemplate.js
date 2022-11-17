@@ -3,7 +3,6 @@ import { Route } from "react-router-dom";
 import styled from "styled-components";
 import HeaderAccount from "../Components/HeaderAccount/HeaderAccount";
 import MenuMain from "../Components/MenuMain/MenuMain";
-import Modal from "../Components/Modal/Modal";
 import SidebarLeft from "../Components/SidebarLeft/SidebarLeft";
 import './JiraMainTemplate.scss';
 
@@ -21,13 +20,12 @@ export default function JiraMainTemplate(props) {
       <MainJiraTemplate className="jira flex">
         <SidebarLeft />
         <MenuMain />
-        <div className="ml-72 px-16 pt-4 w-full overflow-x-hidden overflow-y-auto">
+        <div className="jira-main-child ml-72 px-16 pt-2 w-full overflow-x-hidden overflow-y-auto">
           <HeaderAccount />
           <Component {...propsRoute} />
         </div>
         {/* <Modal /> */}
       </MainJiraTemplate>
-
     </>
   })}>
   </Route>

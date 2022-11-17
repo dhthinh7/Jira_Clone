@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { LINK_TO_EFFECT_LOADER_SAGA, SIGNUP, USER_SIGN_IN_SAGA } from '../../redux/contains/contains';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import './Login.scss';
+
 function LoginPage(props) {
   const {
     errors,
@@ -18,7 +20,7 @@ function LoginPage(props) {
 
   return (
     <form onSubmit={handleSubmit} className="container" style={{ height: window.innerHeight }} >
-      <div className="d-flex flex-column justify-content-center align-items-center w-1/4 mx-auto" style={{ height: '100%' }} >
+      <div className="login " style={{ height: '100%' }} >
         <h3 className="text-center" style={{ fontWeight: 300, fontSize: 35 }}>Login</h3>
         <div className="d-flex mt-3 w-full" >
           <Input onChange={handleChange} style={{ width: '100%', minWidth: 300 }} name="email" size="large" placeholder="email" prefix={<UserOutlined />} />
@@ -29,8 +31,8 @@ function LoginPage(props) {
         </div>
         <div className="text-danger">{errors.password}</div>
         <div className="flex justify-between w-full">
-          <Button htmlType="submit" size="large" style={{ minWidth: '48%', backgroundColor: 'rgb(102,117,223)', color: '#fff' }} className="mt-5 border-0">Login</Button>
-          <Button size="large" style={{ minWidth: '48%', backgroundColor: 'rgb(102,117,223, 70%)', color: '#fff' }} className="mt-5 w-1/2 border-0" onClick={() => {
+          <Button htmlType="submit" size="large" style={{ minWidth: '48%', backgroundColor: 'rgb(102,117,223)', color: '#fff' }} className="login_btn mt-5 border-0">Login</Button>
+          <Button size="large" style={{ minWidth: '48%', backgroundColor: 'rgb(102,117,223, 70%)', color: '#fff' }} className="login_btn mt-5 w-1/2 border-0" onClick={() => {
             dispatch({
               type: LINK_TO_EFFECT_LOADER_SAGA,
               actionType: SIGNUP

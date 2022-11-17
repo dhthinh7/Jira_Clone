@@ -1,0 +1,231 @@
+.project-management {
+  margin-top: .5rem;
+  .project-table {
+    padding: 1rem;
+  
+    .ant-table-content {
+      .ant-table-thead {
+        tr {
+          th {
+            &:nth-child(1) {
+              width: 75px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .project-table {
+    padding: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .project-table {
+    padding: 0;
+
+    .ant-table-content {
+      font-size: .9rem;
+
+      .ant-table-thead {
+        tr {
+          th {
+            &:nth-child(1) {
+              width: 60px;
+            }
+
+            &:nth-child(2) {
+              width: 125px;
+            }
+
+            padding: 10px;
+          }
+        }
+      }
+
+      .ant-table-tbody {
+        tr {
+          td {
+            padding: 10px;
+
+            .project-addBtn {
+              padding: 0 11px;
+            }
+
+            .project-action.btn {
+              transform: scale(.9);
+              margin-right: 2px !important;
+            }
+          }
+
+          .project-memberAvatar {
+            display: none;
+
+            &:nth-child(1) {
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .project-management {
+    margin-top: 1rem;
+    .project-table {
+      padding: 0;
+
+      .ant-table-content {
+        font-size: .8rem;
+
+        .ant-table-thead {
+          tr {
+            th {
+              &:nth-child(1) {
+                width: 50px;
+              }
+
+              &:nth-child(2) {
+                width: 7.5rem;
+              }
+
+              padding: 10px;
+            }
+          }
+        }
+
+        .ant-table-tbody {
+          tr {
+            td {
+              padding: 10px;
+
+              .project-addBtn {
+                padding: 0 7px;
+              }
+
+              .project-action.btn {
+                transform: scale(.8);
+                margin-right: 0px !important;
+                padding: 0.3rem 0.5rem;
+              }
+
+              .project-memberAvatar {
+                display: none;
+
+                &:nth-child(1) {
+                  display: inline-block;
+                }
+              }
+
+              .project-memberAvatarHide,
+              .project-addBtn,
+              .project-memberAvatar {
+                width: 28px !important;
+                height: 28px !important;
+              }
+
+              .project-memberAvatarHide {
+                line-height: 0 22px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .ant-popover-inner-content {
+    margin-top: 1rem;
+    .table {
+      tr, th {
+        padding: .55rem;
+      }
+
+      tr {
+        td {
+          button {
+            font-size: .6rem;
+          }
+          img {
+            width: 25px;
+            margin-right: 0 !important;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 576px) {
+  .project-management {
+    .project-table {
+      .ant-table-content {
+        font-size: .8rem;
+        .ant-table-thead {
+          tr {
+            th {
+              // Hide STT, Category
+              &:nth-child(1), &:nth-child(3) {
+                display: none;
+              }
+
+              &:nth-child(2) {
+                width: 7.5rem;
+              }
+
+              padding: 10px;
+            }
+          }
+        }
+
+        .ant-table-tbody {
+          tr {
+            td {
+              padding: 10px;
+
+              // Hide STT, Category
+              &:nth-child(1), &:nth-child(3) {
+                display: none;
+              }
+
+              .project-addBtn {
+                padding: 0 7px;
+              }
+
+              .project-action.btn {
+                transform: scale(.8);
+                margin-right: 0px !important;
+                padding: 0.3rem 0.5rem;
+              }
+
+              .project-memberAvatar {
+                display: none;
+
+                &:nth-child(1) {
+                  display: inline-block;
+                }
+              }
+
+              .project-memberAvatarHide,
+              .project-addBtn,
+              .project-memberAvatar {
+                width: 28px !important;
+                height: 28px !important;
+              }
+
+              .project-memberAvatarHide {
+                line-height: 0 22px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

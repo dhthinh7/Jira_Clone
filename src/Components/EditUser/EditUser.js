@@ -7,6 +7,7 @@ import { withFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { EDIT_USER_SAGA, GET_USER_SAGA, SET_SUBMIT_TASK } from "../../redux/contains/contains";
 import { REGEX_EMAIL, REGEX_PHONE } from "../../utils/constain/setting";
+import './EditUser.scss';
 
 function EditUser(props) {
   const dispatch = useDispatch();
@@ -25,21 +26,21 @@ function EditUser(props) {
 
   return (
     <form onSubmit={(e) => { e.preventDefault(); handleSubmit() }} className="container" >
-      <div className="d-flex flex-column justify-content-center align-items-center w-3/4 mx-auto" style={{ height: '100%' }} >
+      <div className="userEdit-content d-flex flex-column justify-content-center align-items-center w-3/4 mx-auto" style={{ height: '100%' }} >
         <h3 className="text-center" style={{ fontWeight: 300, fontSize: 35 }}>USER ID: {props.userEdit.userId}</h3>
-        <div className="d-flex mt-3 w-full" >
+        <div className="userEdit-item d-flex mt-3 w-full" >
           <Input onChange={handleChange} style={{ width: '100%', minWidth: 300 }} name="name" size="large" placeholder="Name" prefix={<UserOutlined />} value={values.name} />
         </div>
         <div className="text-danger text-start">{errors.name}</div>
-        <div className="d-flex mt-3 w-full" >
+        <div className="userEdit-item d-flex mt-3 w-full" >
           <Input onChange={handleChange} style={{ width: '100%', minWidth: 300 }} name="email" size="large" placeholder="Email" prefix={<MailOutlined />} value={values.email} />
         </div>
         <div className="text-danger text-left">{errors.email}</div>
-        <div className="d-flex mt-3 w-full">
+        <div className="userEdit-item d-flex mt-3 w-full">
           <Input onChange={handleChange} style={{ width: '100%', minWidth: 300 }} type="phoneNumber" name="phoneNumber" size="large" placeholder="PhoneNumber" prefix={<PhoneOutlined />} value={values.phoneNumber} />
         </div>
         <div className="text-danger">{errors.phoneNumber}</div>
-        <div className="d-flex mt-3 w-full">
+        <div className="userEdit-item d-flex mt-3 w-full">
           <Input onChange={handleChange} style={{ width: '100%', minWidth: 300 }} type="password" name="password" size="large" placeholder="Enter new password" prefix={<LockOutlined />} value={values.password} />
         </div>
         <div className="text-danger">{errors.password}</div>

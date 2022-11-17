@@ -1,6 +1,8 @@
 .jr-head-account {
   position: relative;
-
+  z-index: 200;
+  width: fit-content;
+  margin-left: auto;
   .avatar {
     margin-right: 30px;
   }
@@ -148,4 +150,57 @@
     display: none;
     opacity: 0;
   }
+}
+
+// Media device 
+@media screen and (max-width: 1200px) {
+
+}
+
+@media screen and (max-width: 992px) {
+
+}
+
+@media screen and (max-width: 768px) {
+  .jr-head-account {
+    position: fixed;
+    right: 1rem;
+    h3, i, span {
+      font-size: .8rem;
+      color: white;
+    }
+    .avatar {
+      margin-right: 15px;
+      .header-img {
+        width: 1.6rem !important;
+      }
+    }
+
+    .arrow {
+      width: 10px;
+      height: 10px;
+  
+      &::after {
+        content: '';
+        top: 10px;
+        right: 10px;
+        position: absolute;
+        border-top: 10px solid black;
+        border-right: 10px solid transparent;
+        border-left: 10px solid transparent;
+        transition: all .3s ease-out;
+        opacity: 1;
+        cursor: pointer;
+      }
+  
+      &:focus {
+        outline: none;
+      }
+  
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+
 }

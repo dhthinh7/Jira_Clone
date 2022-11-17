@@ -1,0 +1,62 @@
+@media screen and (max-width: 992px) {
+  .project-detailModal {
+    .modal-content {
+      .modal-body {
+        .container-fluid {
+          .row-right {
+            max-width: 55%;
+            flex: none;
+          }
+  
+          .row-left {
+            max-width: calc(100% - 55%);
+            flex: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .project-detailModal {
+    .modal-dialog {
+      margin: 0;
+      .modal-content {
+        .modal-body {
+          .container-fluid {
+            .project-row {
+              flex-flow: column-reverse;
+              .row-right {
+                margin-top: 1rem;
+                max-width: 100%;
+                flex: none;
+                &::before {
+                  content: '';
+                  border: 1rem solid #DDDD;
+                  background: #DDDD;
+                  position: absolute;
+                  top: 0;
+                  right: 0;
+                  left: 0;
+                  box-shadow: 0 0 10px #DDDD;
+                }
+  
+                &>p {
+                  margin-top: 3rem;
+                }
+              }
+      
+              .row-left {
+                max-width: 100%;
+                flex: none;
+              }
+            }
+            }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {}

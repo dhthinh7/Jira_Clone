@@ -40,6 +40,7 @@ export default function UserManagement() {
   }, [])
 
   useEffect(() => {
+    window.innerWidth > 577 ? setContentDelButton('Delete') : setContentDelButton('Del');
     let handleResize = window.addEventListener('resize', () => {
       setScreenWidth(window.innerWidth);
       window.innerWidth > 577 ? setContentDelButton('Delete') : setContentDelButton('Del');
